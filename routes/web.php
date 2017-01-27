@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'Controller@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('users', 'UserController');
+    Route::resource('cards', 'CardController');
+    Route::resource('comments', 'CommentController');
+
+    Route::get('/logout', 'Auth\LoginController@logout');
+});

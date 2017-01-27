@@ -26,12 +26,12 @@
                 </p>
             </div>
             <div class="col-lg-4">
-                <h4>Our Bunker</h4>
+                <h4>Navigation</h4>
                 <div class="hline-w"></div>
                 <p>
-                    Some Ave, 987,<br/>
-                    23890, New York,<br/>
-                    United States.<br/>
+                    <a href="#">Home</a><br/>
+                    <a href="#">About</a><br/>
+                    <a href="#">Help</a><br/>
                 </p>
             </div>
 
