@@ -42,8 +42,12 @@
     <!-- Fixed navbar -->
     @include('layouts.menu')
     <!-- Content -->
-    <div>
-        @yield('content')
+    <div class="container-fluid mt">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                @yield('content')
+            </div>
+        </div>
     </div>
     <!-- FOOTER -->
     @include('layouts.footer')
