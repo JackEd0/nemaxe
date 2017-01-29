@@ -41,10 +41,19 @@
 <body>
     <!-- Fixed navbar -->
     @include('layouts.menu')
+
+    <div id="blue">
+        <div class="container">
+            <div class="row">
+                <h3 class="text-uppercase">@yield('blue-wrap')</h3>
+            </div><!-- /row -->
+        </div> <!-- /container -->
+    </div><!-- /blue -->
+
     <!-- Content -->
     <div class="container-fluid mt">
         <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
+            <div class="col-sm-8 col-sm-offset-2">
                 @yield('content')
             </div>
         </div>

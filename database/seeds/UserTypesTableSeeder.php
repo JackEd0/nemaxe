@@ -13,7 +13,7 @@ class UserTypesTableSeeder extends Seeder
     {
         $nameList = array('admin', 'client');
         for ($i = 0; $i < 2; $i++) {
-            DB::table('card_types')->insert([
+            DB::table('user_types')->insert([
                 'name' => $nameList[$i],
             ]);
         }

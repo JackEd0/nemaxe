@@ -7,33 +7,34 @@ use Illuminate\Support\Facades\DB;
 
 class HomeComposer
 {
-    public $experiences;
-    public $educations;
-    public $realisations;
-    public $skills_categories = array();
-    public $skills_categories_title = array();
-    public $skills_categories_number;
+    public $cards;
+    public $card_types;
+    public $comments_number = array();
 
     /**
      * HomeComposer constructor.
      */
     public function __construct()
     {
-        $this->skills_categories = ["language", "framework", "software", "platform"];
-        $this->skills_categories_title = ["Langages", "Frameworks", "Logiciels", "Plateformes"];
-        $this->skills_categories_number = count($this->skills_categories);
-        for ($i = 0; $i < $this->skills_categories_number; $i++) {
-            $this->skills[] = DB::table('skills')
-                ->where('category', $this->skills_categories[$i])
-                ->get();
+        $this->card_types = DB::table('card_types')->get();
+        $this->cards = DB::table('cards')
+            ->join('users', 'users.id', '=', 'cards.user_id')
+            ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
+            //->join('comments', 'comments.card_id', '=', 'cards.id')
+            ->select('cards.id as id',
+                'cards.title as title',
+                'cards.created_at as created_at',
+                'cards.content as content',
+                'card_types.name as category',
+                'users.username as author')
+                //'count(comments.id) as comment_number')
+            ->inRandomOrder()
+            ->limit(6)
+            ->get();
+        foreach($this->cards as $card) {
+            $this->comments_number[] = DB::table('comments')->where('card_id', $card->id)->count();
         }
-        $this->experiences = DB::table('experiences')->orderBy('time_end', 'desc')
-            ->limit(3)
-            ->get();
-        $this->educations = DB::table('educations')->get();
-        $this->realisations = DB::table('realisations')->orderBy('creation_date', 'desc')
-            ->limit(3)
-            ->get();
+
     }
 
     /**
@@ -44,13 +45,9 @@ class HomeComposer
      */
     public function compose(View $view)
     {
-        $skills = $this->skills;
-        $skills_categories_title = $this->skills_categories_title;
-        $skills_categories_number = $this->skills_categories_number;
-        $educations = $this->educations;
-        $experiences = $this->experiences;
-        $realisations = $this->realisations;
-        $view->with(compact('experiences', 'educations', 'realisations',
-            'skills', 'skills_categories_title', 'skills_categories_number'));
+        $cards = $this->cards;
+        $card_types = $this->card_types;
+        $comments_number = $this->comments_number;
+        $view->with(compact('cards', 'card_types', 'comments_number'));
     }
 }

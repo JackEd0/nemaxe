@@ -17,10 +17,11 @@ class CreateCardsTable extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('card_type_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->string('title');
             $table->string('content');
-            $table->string('description');
-            $table->string('date');
+            //$table->string('description');
+            $table->string('tag');
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });

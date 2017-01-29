@@ -11,7 +11,7 @@ class CardTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        $nameList = array('physics', 'chemistry', 'maths', 'history');
+        $nameList = array('Physics', 'Chemistry', 'Maths', 'History');
         for ($i = 0; $i < 4; $i++) {
             DB::table('card_types')->insert([
                 'name' => $nameList[$i],

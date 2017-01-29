@@ -32,6 +32,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'username' => $firstNameList[rand(0, 36)] . $i,
                 'email' => $firstNameList[rand(0, 36)] . $lastNameList[rand(0, 22)] . $i . '@' . $serverList[rand(0, 4)] . '.' . $domainList[rand(0, 14)],
+                'phone' => '(' . rand(0, 9) . rand(0, 9) . rand(0, 9) . ')' . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9),
                 'password' => Hash::make('Admin@1234'),
             ]);
         }
