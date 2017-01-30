@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->string('content');
             $table->integer('user_id')->unsigned();
             $table->integer('card_id')->unsigned();
-            $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
