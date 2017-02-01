@@ -21,12 +21,12 @@ if (isset($subbar)) {
         font-size: 16px;
         background-color: white;
         background-image: url('/img/searchicon.png');
-        background-position: 10px 5px;
+        background-position: 5px 3px;
         background-repeat: no-repeat;
-        padding: 5px 20px 5px 40px;
+        padding: 1px 20px 1px 40px;
         -webkit-transition: width 0.4s ease-in-out;
         transition: width 0.4s ease-in-out;
-        margin-top: 5px;
+        margin-top: 10px;
         margin-left: 5px;
     }
 
@@ -48,9 +48,10 @@ if (isset($subbar)) {
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li class="{{ $navbar['Home'] }}"><a href="{{ url('/') }}">HOME</a></li>
-                <li class="{{ $navbar['About'] }}"><a href="{{ url('/') }}">ABOUT</a></li>
+                @if(!Auth::check())
                 <li class="{{ $navbar['Login'] }}"><a href="{{ url('/') }}">LOGIN</a></li>
                 <li class="{{ $navbar['Register'] }}"><a href="{{ url('/') }}">REGISTER</a></li>
+                @else
                 <li class="dropdown {{ $navbar['Admin'] }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">JOHN DOE<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -60,6 +61,7 @@ if (isset($subbar)) {
                         <li><a href="{{ url('/') }}">DISCONNECT</a></li>
                     </ul>
                 </li>
+                @endif
                 <li>
                     <form>
                         <input type="text" name="search" placeholder="Search.." id="input_search">

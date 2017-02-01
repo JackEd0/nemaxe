@@ -272,13 +272,16 @@ class ComposerStaticInit22f73c468bd4bfbb6c159ed61197c872
     );
 
     public static $classMap = array (
+        'CardTagsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CardTagsTableSeeder.php',
         'CardTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CardTypesTableSeeder.php',
         'CardsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CardsTableSeeder.php',
         'CommentsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CommentsTableSeeder.php',
+        'CreateCardTagsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_31_180011_create_card_tags_table.php',
         'CreateCardTypesTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_26_160654_create_card_types_table.php',
         'CreateCardsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_26_160637_create_cards_table.php',
         'CreateCommentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_26_160607_create_comments_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateTagsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_31_175926_create_tags_table.php',
         'CreateUserTypesTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_26_160709_create_user_types_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
@@ -810,6 +813,7 @@ class ComposerStaticInit22f73c468bd4bfbb6c159ed61197c872
         'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/recursion-context/src/InvalidArgumentException.php',
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'TagsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TagsTableSeeder.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'UserTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UserTypesTableSeeder.php',
         'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UsersTableSeeder.php',
