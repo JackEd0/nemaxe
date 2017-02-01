@@ -6,13 +6,16 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CardTagsTableSeeder' => $baseDir . '/database/seeds/CardTagsTableSeeder.php',
     'CardTypesTableSeeder' => $baseDir . '/database/seeds/CardTypesTableSeeder.php',
     'CardsTableSeeder' => $baseDir . '/database/seeds/CardsTableSeeder.php',
     'CommentsTableSeeder' => $baseDir . '/database/seeds/CommentsTableSeeder.php',
+    'CreateCardTagsTable' => $baseDir . '/database/migrations/2017_01_31_180011_create_card_tags_table.php',
     'CreateCardTypesTable' => $baseDir . '/database/migrations/2017_01_26_160654_create_card_types_table.php',
     'CreateCardsTable' => $baseDir . '/database/migrations/2017_01_26_160637_create_cards_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2017_01_26_160607_create_comments_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateTagsTable' => $baseDir . '/database/migrations/2017_01_31_175926_create_tags_table.php',
     'CreateUserTypesTable' => $baseDir . '/database/migrations/2017_01_26_160709_create_user_types_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
@@ -544,6 +547,7 @@ return array(
     'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => $vendorDir . '/sebastian/recursion-context/src/InvalidArgumentException.php',
     'SebastianBergmann\\ResourceOperations\\ResourceOperations' => $vendorDir . '/sebastian/resource-operations/src/ResourceOperations.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
+    'TagsTableSeeder' => $baseDir . '/database/seeds/TagsTableSeeder.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UserTypesTableSeeder' => $baseDir . '/database/seeds/UserTypesTableSeeder.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',

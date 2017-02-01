@@ -21,7 +21,7 @@ class CardsTableSeeder extends Seeder
                 'title' =>  $titleList[rand(0,2)] . ' of ' . '199' . $i%9,
                 'content' => $contentList[rand(0,2)],
                 //'description' => 'It has survived not only five centuries, Exam of 199' . rand(0,9),
-                'tag' => '199' . $i%9,
+                //'tag' => '199' . $i%9,
             ]);
         }
     }
