@@ -15,10 +15,10 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+Route::resource('cards', 'CardController');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
-    Route::resource('cards', 'CardController');
     Route::resource('comments', 'CommentController');
     Route::resource('tags', 'TagController');
 

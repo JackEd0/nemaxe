@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CardController extends Controller
 {
@@ -45,7 +46,19 @@ class CardController extends Controller
      */
     public function show($id)
     {
-        //
+        $card = DB::table('cards')->where('cards.id', $id)
+            ->join('users', 'users.id', '=', 'cards.user_id')
+            ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
+            ->select('cards.id as id',
+                'cards.title as title',
+                'cards.created_at as created_at',
+                'cards.content as content',
+                'card_types.name as category',
+                'users.username as author')
+            ->first();
+        $comments_number = DB::table('comments')->where('card_id', $id)->count();
+
+        return view('cards.cards_form')->with(compact('card', 'comments_number'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        view()->share('card_types', DB::table('card_types')->get());
         view()->composer(
             'home', 'App\Http\ViewComposers\HomeComposer'
         );

@@ -46,8 +46,7 @@ class HomeComposer
     public function compose(View $view)
     {
         $cards = $this->cards;
-        $card_types = $this->card_types;
         $comments_number = $this->comments_number;
-        $view->with(compact('cards', 'card_types', 'comments_number'));
+        $view->with(compact('cards', 'comments_number'));
     }
 }

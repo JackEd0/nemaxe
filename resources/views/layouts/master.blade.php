@@ -22,8 +22,8 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/css/style.css" rel="stylesheet">
     <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -45,7 +45,7 @@
     <div id="blue">
         <div class="container">
             <div class="row">
-                <h3 class="text-uppercase">@yield('blue-wrap')</h3>
+                <h3 class="text-capitalize">@yield('blue-wrap')</h3>
             </div><!-- /row -->
         </div> <!-- /container -->
     </div><!-- /blue -->
@@ -53,8 +53,16 @@
     <!-- Content -->
     <div class="container-fluid mt">
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                @yield('content')
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="row">
+                    <div class="col-lg-8 mb">
+                    @yield('content')
+                    <div class="spacing"></div>
+                    </div>
+                    <div class="col-lg-4" id="sidebar-wrapper">
+                        @include('layouts.sidebar')
+                    </div>
+                </div>
             </div>
         </div>
     </div>

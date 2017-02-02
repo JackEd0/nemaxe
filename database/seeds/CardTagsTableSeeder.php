@@ -11,7 +11,7 @@ class CardTagsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             //Ajout de fiches de type compris entre 1 et 7
             DB::table('card_tags')->insert([
                 'card_id' => $i+1,
