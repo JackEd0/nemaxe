@@ -7,7 +7,7 @@
  */
 ?>
 
-<h4>Categories</h4>
+<h4 class="animated bounce">Categories</h4>
 <div class="hline"></div>
 @foreach($card_types as $card_type)
     <p><a href="#"><i class="fa fa-angle-right"></i> {{ $card_type->name }}</a> <span class="badge badge-theme pull-right">9</span></p>
