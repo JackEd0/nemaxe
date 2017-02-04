@@ -49,10 +49,7 @@ class CardController extends Controller
         $card = DB::table('cards')->where('cards.id', $id)
             ->join('users', 'users.id', '=', 'cards.user_id')
             ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
-            ->select('cards.id as id',
-                'cards.title as title',
-                'cards.created_at as created_at',
-                'cards.content as content',
+            ->select('cards.*',
                 'card_types.name as category',
                 'users.username as author')
             ->first();

@@ -17,13 +17,21 @@ $subbar = 'Cards';
 @stop
 
 @section('content')
-    <p><img class="img-responsive" src="/img/{{ $card->category }}/{{ $card->content }}"></p>
+    <h3 class="ctitle text-capitalize">{{ $card->nature . ' #' . $card->id }}.</h3>
+    <p><img class="img-responsive" src="/img/{{ $card->category . '/' . $card->content }}"></p>
     <h3 class="ctitle">{{ $card->title }}.</h3>
     <p>
         <csmall>Posted: April 25, 2014.</csmall>
         |
-        <csmall2>By: {{ $card->author }} - {{ $comments_number }} Comments</csmall2>
+        <csmall2>By: {{ $card->author . ' - ' . $comments_number }} Comments</csmall2>
     </p>
+    @if ($card->twin_id != null)
+        @if ($card->nature == 'exercise')
+            <a href="#">See solution</i></a>
+        @else
+            <a href="#">See enoncee</i></a>
+        @endif
+    @endif
     <div class="spacing"></div>
     <h6>SHARE:</h6>
     <p class="share">

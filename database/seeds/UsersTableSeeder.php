@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'username' => 'Admin',
-            //'email' => 'admin@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('Admin@1234'),
             'user_type_id' => 1,
         ]);
@@ -31,6 +31,7 @@ class UsersTableSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             DB::table('users')->insert([
                 'username' => $firstNameList[rand(0, 36)] . $i,
+                'email' => $firstNameList[rand(0, 36)] . $lastNameList[rand(0, 22)] . $i . '@' . $serverList[rand(0, 4)] . '.' . $domainList[rand(0, 14)],
                 'password' => Hash::make('Admin@1234'),
             ]);
         }
