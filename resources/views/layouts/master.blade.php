@@ -19,16 +19,18 @@
 
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
-    <script type="text/javascript"> window.jQuery || document.write('<script src="/js/jquery-3.1.1.min.js"></script>')</script>
+    <script > window.jQuery || document.write('<script src="/js/jquery-3.1.1.min.js"><\/script>')</script>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--
     <script type="text/javascript">
         $(document).ready(function() {
         var bodyColor = $('body').css('color');
         if(bodyColor != 'rgb(51, 51, 51)') {
         $("head").prepend('<link href="/css/bootstrap.min.css" rel="stylesheet">');}});
-    </script>
+    </script>-->
 
     <!-- Custom styles for this template -->
     <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -36,7 +38,7 @@
 
     <!-- Bootstrap core js -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-    <script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="/js/bootstrap.min.js"></script>')}</script>
+    <script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="/js/bootstrap.min.js"><\/script>')}</script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="/js/ie8-responsive-file-warning.js"></script><![endif]-->
