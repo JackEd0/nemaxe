@@ -34,6 +34,7 @@ if (isset($subbar)) {
         width: 100%;
     }
 </style>
+
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
