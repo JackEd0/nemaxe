@@ -13,31 +13,66 @@ $subbar = 'Cards';
 @stop
 
 @section('blue-wrap')
-    {{ $card->category }}
+    Fiches - Create - Edit
 @stop
 
 @section('content')
-    <h3 class="ctitle text-capitalize">{{ $card->nature . ' #' . $card->id }}.</h3>
-    <p><img class="img-responsive" src="/img/{{ $card->category . '/' . $card->content }}"></p>
-    <h3 class="ctitle">{{ $card->title }}.</h3>
-    <p>
-        <csmall>Posted: April 25, 2014.</csmall>
-        |
-        <csmall2>By: {{ $card->author . ' - ' . $comments_number }} Comments</csmall2>
-    </p>
-    @if ($card->twin_id != null)
-        @if ($card->nature == 'exercise')
-            <a href="#">See solution</i></a>
+    <form class="" action="@if(isset($id)) {{ url('/cards/'. $id ) }}
+    @else {{ url('/cards') }} @endif" method="post">
+        {{ csrf_field() }}
+        @if(isset($id)) {{ method_field('PUT') }} @endif
+        <select class="" name="card_nature">
+            <option value="exercise">Exercise</option>
+            <option value="solution">Solution</option>
+        </select>
+        <input type="text" name="card_number"
+        @if (isset($id))
+            {{ ' value="' . $card->number . '" disabled' }}
         @else
-            <a href="#">See enoncee</i></a>
+            {{ ' value="' . $card_number . '"' }}
         @endif
-    @endif
-    <div class="spacing"></div>
-    <h6>SHARE:</h6>
-    <p class="share">
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-tumblr"></i></a>
-        <a href="#"><i class="fa fa-google-plus"></i></a>
-    </p>
+        />
+        <select class="" name="card_type_id">
+            @if (isset($id))
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                    @if ($card->card_type_id == $category->id)
+                        {{ ' checked'}}
+                    @endif
+                    >{{ $category->name }}</option>
+                @endforeach
+            @else
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            @endif
+        </select>
+        <input type="text" name="card_title"
+        @if (isset($id))
+            {{ ' value="' . $card->title . '"' }}
+        @endif
+        >
+        <input type="text" name="card_content"
+        @if (isset($id))
+            {{ ' value="' . $card->content . '"' }}
+        @endif
+        >
+        <select class="" name="twin_id">
+            @if (isset($id))
+                @foreach ($cards as $card_item)
+                    <option value="{{ $card_item->id }}"
+                    @if ($card->twin_id == $card_item->id)
+                        {{ ' checked'}}
+                    @endif
+                    >{{ $card_item->number }}</option>
+                @endforeach
+            @else
+                @foreach ($cards as $card_item)
+                    <option value="{{ $card_item->id }}">{{ $card_item->number }}</option>
+                @endforeach
+            @endif
+        </select>
+    </form>
+
+
 @endsection

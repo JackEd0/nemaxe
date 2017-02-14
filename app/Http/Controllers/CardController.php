@@ -14,7 +14,7 @@ class CardController extends Controller
      */
     public function index()
     {
-        //
+        return view('cards.cards_index');
     }
 
     /**
@@ -24,7 +24,7 @@ class CardController extends Controller
      */
     public function create()
     {
-        //
+        return view('cards.cards_form');
     }
 
     /**
@@ -35,7 +35,17 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('cards')->insertGetId([
+            'number' => DB::table('cards')->max('number') + 1,
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'nature' => $request->input('nature'),
+            'card_type_id' => $request->input('card_type_id'),
+            'user_id' => $request->input('user_id'),
+            'twin_id' => $request->input('twin_id')
+        ]);
+
+        return redirect('/cards');
     }
 
     /**
@@ -55,7 +65,7 @@ class CardController extends Controller
             ->first();
         $comments_number = DB::table('comments')->where('card_id', $id)->count();
 
-        return view('cards.cards_form')->with(compact('card', 'comments_number'));
+        return view('cards.cards_show')->with(compact('card', 'comments_number'));
     }
 
     /**
@@ -66,7 +76,18 @@ class CardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $card = DB::table('cards')->where('cards.id', $id)
+            ->join('users', 'users.id', '=', 'cards.user_id')
+            ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
+            ->select('cards.*',
+                'card_types.name as category',
+                'users.username as author')
+            ->first();
+        $comments_number = DB::table('comments')->where('card_id', $id)->count();
+
+        return view('cards.cards_form')->with(compact(
+            'id', 'card', 'comments_number'
+        ));
     }
 
     /**
@@ -78,7 +99,17 @@ class CardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('cards')->where('id', $id)
+            ->update([
+                'number' => DB::table('cards')->max('number') + 1,
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'nature' => $request->input('nature'),
+                'card_type_id' => $request->input('card_type_id'),
+                'user_id' => $request->input('user_id'),
+                'twin_id' => $request->input('twin_id')
+            ]);
+        return redirect('/cards');
     }
 
     /**
@@ -89,6 +120,7 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('cards')->where('id', $id)->delete();
+        return response()->json(['message' => 'Success!','state' => 200]);
     }
 }

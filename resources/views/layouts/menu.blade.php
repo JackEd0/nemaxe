@@ -50,14 +50,14 @@ if (isset($subbar)) {
             <ul class="nav navbar-nav">
                 <li class="{{ $navbar['Home'] }}"><a href="{{ url('/') }}">HOME</a></li>
                 @if(!Auth::check())
-                <li class="{{ $navbar['Login'] }}"><a href="{{ url('/') }}">LOGIN</a></li>
-                <li class="{{ $navbar['Register'] }}"><a href="{{ url('/') }}">REGISTER</a></li>
+                <li class="{{ $navbar['Login'] }}"><a href="{{ url('/login') }}">LOGIN</a></li>
+                <li class="{{ $navbar['Register'] }}"><a href="{{ url('/register') }}">REGISTER</a></li>
                 @else
                 <li class="dropdown {{ $navbar['Admin'] }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">JOHN DOE<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/') }}">PROFIL</a></li>
-                        <li><a href="{{ url('/') }}">POSTS</a></li>
+                        <li><a href="{{ url('/cards') }}">POSTS</a></li>
                         <li><a href="{{ url('/') }}">COMMENTS</a></li>
                         <li><a href="{{ url('/') }}">DISCONNECT</a></li>
                     </ul>

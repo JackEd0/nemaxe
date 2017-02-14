@@ -18,7 +18,8 @@ class CardsTableSeeder extends Seeder
             //Ajout de fiches de type compris entre 1 et 7
             DB::table('cards')->insert([
                 'card_type_id' => ($i % 3) + 1,
-                'user_id' => $i +1,
+                'user_id' => $i + 1,
+                'number' => $i + 1,
                 'title' =>  $titleList[rand(0,2)] . ' of ' . '199' . $i%9,
                 'content' => $contentList[($i % 3)],
                 'nature' => $natureList[($i % 2)]

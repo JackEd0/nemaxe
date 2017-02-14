@@ -18,6 +18,12 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'home', 'App\Http\ViewComposers\HomeComposer'
         );
+        view()->composer(
+            'cards.cards_form', 'App\Http\ViewComposers\CardComposer'
+        );
+        view()->composer(
+            'cards.cards_index', 'App\Http\ViewComposers\CardComposer@compose_index'
+        );
     }
 
     /**
