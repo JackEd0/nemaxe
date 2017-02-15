@@ -1,231 +1,24 @@
-/*	################################################################
-
-	Thanks to the Author: Carlos Alvarez (http://alvarez.is)
-	Modified by : WASP | Jacques
-
-################################################################# */
-@import url("font-Lato.css");
-@import url("font-Raleway.css");
-
-/* Master
-############################################################################# */
-* {
-    margin: 0;
-    padding: 0px;
-}
-
-body {
-    background: #ffffff;
-    margin: 0;
-    height: 100%;
-    color: #384452;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-}
-
-p {
-    padding: 0;
-    margin-bottom: 12px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    color: #384452;
+#input_search {
+    width: 30px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('/img/searchicon.png');
+    background-position: 5px 3px;
+    background-repeat: no-repeat;
+    padding: 1px 20px 1px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
     margin-top: 10px;
+    margin-left: 5px;
+
+    &:focus {
+        width: 100%;
+    }
 }
 
-img {
-    height: auto;
-    max-width: 100%;
-}
-
-a {
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    -webkit-transition: background-color .4s linear, color .4s linear;
-    -moz-transition: background-color .4s linear, color .4s linear;
-    -o-transition: background-color .4s linear, color .4s linear;
-    -ms-transition: background-color .4s linear, color .4s linear;
-    transition: background-color .4s linear, color .4s linear;
-}
-
-a:hover,
-a:focus {
-    text-decoration: none;
-    color: #01b2fe;
-}
-
-::-moz-selection {
-    color: #fff;
-    text-shadow: none;
-    background: #2B2E31;
-}
-
-::selection {
-    color: #fff;
-    text-shadow: none;
-    background: #2B2E31;
-}
-
-.centered {
-    text-align: center
-}
-
-.btn-theme {
-    color: #fff;
-    background-color: #384452;
-    border-color: #384452;
-    margin: 4px;
-}
-
-.btn-theme:hover,
-.btn-theme:focus,
-.btn-theme:active,
-.btn-theme.active,
-.open .dropdown-toggle.btn-theme {
-    color: #fff;
-    background-color: #00b3fe;
-    border-color: #00b3fe;
-}
-
-.dmbutton:hover,
-.dmbutton:active,
-.dmbutton:focus {
-    color: #ffffff;
-    background-color: #222222;
-    border-color: #ffffff;
-}
-
-.dmbutton {
-    background: rgba(0, 0, 0, 0);
-    border: 1px solid #ffffff;
-    color: #ffffff;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    padding-top: 1.025rem;
-    padding-right: 2.25rem;
-    letter-spacing: 0.85px;
-    padding-bottom: 1.0875rem;
-    padding-left: 2.25rem;
-    font-size: 1.55rem;
-    cursor: pointer;
-    font-weight: normal;
-    line-height: normal;
-    margin: 0 0 1.25rem;
-    text-decoration: none;
-    text-align: center;
-    display: inline-block;
-    -webkit-transition: background-color 300ms ease-out;
-    -moz-transition: background-color 300ms ease-out;
-    transition: background-color 300ms ease-out;
-    -webkit-appearance: none;
-    font-weight: normal !important;
-}
-
-.mtb {
-    margin-top: 80px;
-    margin-bottom: 80px;
-}
-
-.mb {
-    margin-bottom: 60px;
-}
-
-.mt {
-    margin-top: 60px;
-}
-
-.hline {
-    border-bottom: 2px solid #384452;
-}
-
-.hline-w {
-    border-bottom: 2px solid #ffffff;
-    margin-bottom: 25px;
-}
-
-#blue {
-    background: #384452; /*00b3fe;*/
-    margin-top: 60px;
-    margin-bottom: 60px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-}
-
-#blue h3 {
-    color: white;
-    margin-left: 15px;
-}
-
-.ctitle {
-    color: #00b3fe;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-csmall {
-    font-size: 12px;
-    color: #b3b3b3;
-}
-
-csmall2 {
-    font-size: 12px;
-    color: #f39c12
-}
-
-.spacing {
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-.badge-theme {
-    background: #00b3fe;
-}
-
-.share i {
-    padding-right: 15px;
-    font-size: 18px;
-}
-
-.container-fluid {
-    min-height: 68vh;
-}
-
-.home_ul {
-    padding: 30px;
-}
-.home_ul ul{
-    margin-left: 30px;
-    list-style: none;
-    font-size: 20px;
-}
-
-.home_ul i {
-    margin: 10px;
-}
-
-.img-responsive,
-.thumbnail > img,
-.thumbnail a > img,
-.carousel-inner > .item > img,
-.carousel-inner > .item.active > img,
-.carousel-inner > .item > a > img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-/* End of master
-############################################################################# */
-
-/* Navbar
-############################################################################# */
 .navbar {
     min-height: 70px;
     padding-top: 10px;
@@ -248,21 +41,23 @@ csmall2 {
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-    color: #384452; /*#00b3fe;*/
+    color: #384452;
 }
 
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    color: #384452; /*#00b3fe;*/
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #384452;
     background-color: transparent;
 }
 
 .navbar-default {
-    background-color: #00bcd4; /*384452;*/
+    background-color: #00bcd4;
     border-color: transparent;
 }
 
 .dropdown-menu {
-    background: #00bcd4; /*384452;*/
+    background: #00bcd4;
 }
 
 .dropdown-menu > li > a {
@@ -270,152 +65,3 @@ csmall2 {
     font-weight: 700;
     font-size: 12px;
 }
-
-/* End of navbar
-############################################################################# */
-
-/* Footer
-############################################################################# */
-
-#footerwrap {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background: #00bcd4; /*384452;*/
-}
-
-#footerwrap p {
-    color: white; /*#bfc9d3;*/
-}
-
-#footerwrap h4 {
-    color: white;
-}
-
-#footerwrap i {
-    font-size: 30px;
-    color: #bfc9d3;
-    padding-right: 25px;
-}
-
-#footerwrap i:hover {
-    color: #384452; /*#00b3fe;*/
-}
-
-#footerwrap .container .row a:hover, a:focus {
-    color: #384452; /*#01b2fe;*/
-}
-#footerwrap .container .row a {
-    color: white;
-}
-
-/* End of Footer
-############################################################################# */
-
-
-/* Sidebar
-############################################################################# */
-
-.popular-posts {
-    margin: 0px;
-    padding-left: 0px;
-}
-
-.popular-posts li {
-    list-style: none;
-    margin-bottom: 30px;
-    min-height: 70px;
-}
-
-.popular-posts li a,
-.popular-posts li a:hover {
-    color: #2f2f2f;
-    text-decoration: none;
-}
-
-.popular-posts li img {
-    float: left;
-    margin-right: 20px;
-}
-
-.popular-posts li em {
-    font-family: 'Lato', sans-serif;
-    font-size: 12px;
-    color: #b3b3b3
-}
-
-.popular-posts p {
-    line-height: normal;
-    margin-bottom: auto;
-}
-
-.sidebar-nav {
-    /*position: absolute;
-    top: 0;*/
-    width: 300px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-    border-bottom: 1px solid #c2c1c1;
-}
-
-.sidebar-nav li a {
-    /*text-decoration: none;
-    color: #999999;*/
-}
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    /*background: none;*/
-}
-.animated {
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    animation-delay: 2s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-
-@-webkit-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
-    40% {-webkit-transform: translateY(-30px);}
-    60% {-webkit-transform: translateY(-15px);}
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-    40% {transform: translateY(-30px);}
-    60% {transform: translateY(-15px);}
-}
-
-.bounce {
-    -webkit-animation-name: bounce;
-    animation-name: bounce;
-}
-/* End of sidebar
-############################################################################# */

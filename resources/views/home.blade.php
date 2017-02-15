@@ -19,13 +19,13 @@ $subbar = 'Home';
 @section('content')
     @foreach($cards as $i => $card)
         <div class="col-sm-6">
-            <p>#{{ $card->number }}</p>
+            <h3 class="ctitle text-capitalize">{{ $card->nature . ' #' . $card->number }}</h3>
             <p><a href="{{ url('/cards/' . $card->id) }}"><img class="img-responsive" src="/img/{{ $card->category }}/{{ $card->content }}"></a></p>
-            <a href="{{ url('/cards/' . $card->id) }}"><h3 class="ctitle">{{ $card->title }}.</h3></a>
+            <a href="{{ url('/cards/' . $card->id) }}"><h3 class="">{{ $card->title }}.</h3></a>
             <p>
                 <csmall>Posted: April 25, 2014.</csmall>
                 |
-                <csmall2>By: {{ $card->author }} - {{ $comments_number[$i] }} Comments</csmall2>
+                <csmall2>{{ $comments_number[$i] }} Comments</csmall2>
                 |
                 <csmall><a href="#">{{ $card->category }}</a></csmall>
             </p>

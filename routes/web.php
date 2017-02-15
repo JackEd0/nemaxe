@@ -15,17 +15,16 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
-Route::resource('cards', 'CardController', ['only' => [
-    'show'
-]]);
+
+Route::get('cards/{id}', 'CardController@show');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
     Route::resource('comments', 'CommentController');
     Route::resource('tags', 'TagController');
-    Route::resource('cards', 'CardController', ['except' => [
+    Route::resource('cards', 'CardController', ['except' =>
         'show'
-    ]]);
+    ]);
 
 
     Route::get('/logout', 'Auth\LoginController@logout');

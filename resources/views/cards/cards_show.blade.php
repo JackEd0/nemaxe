@@ -8,17 +8,19 @@ $subbar = 'Cards';
 @stop
 
 @section('blue-wrap')
-    Ajouter / Editer une fiche
+    Visualiser une fiche
 @stop
 
 @section('content')
-    <h3 class="ctitle text-capitalize">{{ $card->nature . ' #' . $card->number }}.</h3>
+    <h3 class="ctitle text-capitalize">{{ $card->nature . ' #' . $card->number }}</h3>
     <p><img class="img-responsive" src="/img/{{ $card->category . '/' . $card->content }}"></p>
-    <h3 class="ctitle">{{ $card->title }}.</h3>
+    <h3 class="">{{ $card->title }}.</h3>
     <p>
         <csmall>Posted: April 25, 2014.</csmall>
         |
         <csmall2>By: {{ $card->author . ' - ' . $comments_number }} Comments</csmall2>
+        |
+        <csmall><a href="#">{{ $card->category }}</a></csmall>
     </p>
     @if ($card->twin_id != null)
         @if ($card->nature == 'exercise')

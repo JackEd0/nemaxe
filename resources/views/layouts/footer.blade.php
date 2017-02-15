@@ -35,6 +35,6 @@
                 </p>
             </div>
 
-        </div><! --/row -->
-    </div><! --/container -->
-</div><! --/footerwrap -->
+        </div>
+    </div>
+</div>

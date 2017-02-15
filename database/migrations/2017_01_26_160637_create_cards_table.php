@@ -19,6 +19,7 @@ class CreateCardsTable extends Migration
             $table->integer('number')->unsigned();
             $table->string('title');
             $table->string('content');
+            $table->string('status')->default('publish');
             //nature is exercise or solution
             $table->string('nature');
             $table->integer('card_type_id')->unsigned();

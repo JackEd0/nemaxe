@@ -1,41 +1,11 @@
-@import url("font-Lato.css");
-@import url("font-Raleway.css");
+@import url("/css/font-Lato.css");
+@import url("/css/font-Raleway.css");
 
 @theme_blue: #01b2fe;
 
 * {
     margin: 0;
     padding: 0px;
-}
-
-body {
-    background: #ffffff;
-    margin: 0;
-    height: 100%;
-    color: #384452;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-}
-
-p {
-    padding: 0;
-    margin-bottom: 12px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    color: #384452;
-    margin-top: 10px;
-}
-
-img {
-    height: auto;
-    max-width: 100%;
 }
 
 a {
@@ -55,20 +25,13 @@ a {
     }
 }
 
-::-moz-selection {
-    color: #fff;
-    text-shadow: none;
-    background: #2B2E31;
-}
-
-::selection {
-    color: #fff;
-    text-shadow: none;
-    background: #2B2E31;
-}
-
-.centered {
-    text-align: center
+body {
+    background: #ffffff;
+    margin: 0;
+    height: 100%;
+    color: #384452;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
 }
 
 .btn-theme {
@@ -87,12 +50,8 @@ a {
         border-color: #00b3fe;
     }
 }
-.dmbutton:hover,
-.dmbutton:active,
-.dmbutton:focus {
-    color: #ffffff;
-    background-color: #222222;
-    border-color: #ffffff;
+.centered {
+    text-align: center
 }
 
 .dmbutton {
@@ -119,6 +78,47 @@ a {
     transition: background-color 300ms ease-out;
     -webkit-appearance: none;
     font-weight: normal !important;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: #ffffff;
+        background-color: #222222;
+        border-color: #ffffff;
+    }
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+}
+
+p {
+    padding: 0;
+    margin-bottom: 12px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #384452;
+    margin-top: 10px;
+}
+
+::-moz-selection {
+    color: #fff;
+    text-shadow: none;
+    background: #2B2E31;
+}
+
+::selection {
+    color: #fff;
+    text-shadow: none;
+    background: #2B2E31;
 }
 
 .mtb {
@@ -144,17 +144,18 @@ a {
 }
 
 #blue {
-    background: #384452; /*00b3fe;*/
+    background: #384452;
     margin-top: 60px;
     margin-bottom: 60px;
     padding-top: 25px;
     padding-bottom: 25px;
+
+    h3 {
+        color: white;
+        margin-left: 15px;
+    }
 }
 
-#blue h3 {
-    color: white;
-    margin-left: 15px;
-}
 
 .ctitle {
     color: #00b3fe;
@@ -192,15 +193,14 @@ csmall2 {
 
 .home_ul {
     padding: 30px;
-}
-.home_ul ul{
-    margin-left: 30px;
-    list-style: none;
-    font-size: 20px;
-}
-
-.home_ul i {
-    margin: 10px;
+    ul{
+        margin-left: 30px;
+        list-style: none;
+        font-size: 20px;
+    }
+    i {
+        margin: 10px;
+    }
 }
 
 .img-responsive,

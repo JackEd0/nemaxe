@@ -18,6 +18,7 @@ class HomeComposer
     {
         $this->card_types = DB::table('card_types')->get();
         $this->cards = DB::table('cards')
+            ->where('cards.nature', 'exercise')
             ->join('users', 'users.id', '=', 'cards.user_id')
             ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
             //->join('comments', 'comments.card_id', '=', 'cards.id')

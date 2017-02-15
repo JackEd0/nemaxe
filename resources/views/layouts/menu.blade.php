@@ -12,28 +12,6 @@ if (isset($subbar)) {
     $navbar[$subbar] = 'active';
 }
 ?>
-<style>
-    #input_search {
-        width: 30px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 30px;
-        font-size: 16px;
-        background-color: white;
-        background-image: url('/img/searchicon.png');
-        background-position: 5px 3px;
-        background-repeat: no-repeat;
-        padding: 1px 20px 1px 40px;
-        -webkit-transition: width 0.4s ease-in-out;
-        transition: width 0.4s ease-in-out;
-        margin-top: 10px;
-        margin-left: 5px;
-    }
-
-    #input_search:focus {
-        width: 100%;
-    }
-</style>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
@@ -54,12 +32,13 @@ if (isset($subbar)) {
                 <li class="{{ $navbar['Register'] }}"><a href="{{ url('/register') }}">REGISTER</a></li>
                 @else
                 <li class="dropdown {{ $navbar['Admin'] }}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">JOHN DOE<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{ Auth::user()->username }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/') }}">PROFIL</a></li>
                         <li><a href="{{ url('/cards') }}">POSTS</a></li>
                         <li><a href="{{ url('/') }}">COMMENTS</a></li>
-                        <li><a href="{{ url('/') }}">DISCONNECT</a></li>
+                        <li><a href="{{ url('/logout') }}">DISCONNECT</a></li>
                     </ul>
                 </li>
                 @endif
@@ -69,6 +48,6 @@ if (isset($subbar)) {
                     </form>
                 </li>
             </ul>
-        </div><!--/.nav-collapse -->
+        </div>
     </div>
 </div>
