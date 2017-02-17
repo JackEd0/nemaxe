@@ -21,29 +21,29 @@ $subbar = 'Cards';
     </div>
     <hr/>
     <div class="content">
-        <h2>Fiches</h2>
         @foreach($cards as $i => $card)
-            <div class="col-lg-4 panel-default" id="div_cards_{{ $card->id }}">
-                <div class="panel-heading">{{ $card->nature . ' #' . $card->number }}</div>
-                <div class="panel-body">
-                    <h3 class="ctitle">{{ $card->title }}.</h3>
-                    <p><img class="img-responsive" src="/img/{{ $card->category . '/' . $card->content }}"></p>
-                    <p>
-                        <csmall>Posted: April 25, 2014.</csmall>
-                        |
-                        <csmall2>By: {{ $card->author . ' - ' . $comments_number[$i] }} Comments</csmall2>
-                    </p>
-                </div>
-                <div class="panel-footer">
-                    <span class="btn-group">
-                        <a class="btn btn-secondary" href="{{ url('/cards/' . $card->id . '/edit') }}"><span
-                                    class="glyphicon glyphicon-pencil"></span></a>
-                        <button class="btn btn-secondary" type="button"
-                                onclick="delete_card('{{ $card->id }}')">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    </span>
-                </div>
+            <div class="col-lg-6" id="div_cards_{{ $card->id }}">
+                <h3 class="ctitle text-capitalize">{{ $card->nature . ' #' . $card->number }}</h3>
+                <p><a href="{{ url('/cards/' . $card->id) }}">
+                    <img class="img-responsive" src="/img/{{ $card->category }}/{{ $card->content }}">
+                </a></p>
+                <a href="{{ url('/cards/' . $card->id) }}"><h3 class="">{{ $card->title }}.</h3></a>
+                <p>
+                    <csmall>Posted: April 25, 2014.</csmall>
+                    |
+                    <csmall2>By: {{ $card->author . ' - ' . $comments_number[$i] }} Comments</csmall2>
+                    |
+                    <csmall><a href="#">{{ $card->category }}</a></csmall>
+                </p>
+                <span class="btn-group mmb">
+                    <a class="btn btn-secondary" href="{{ url('/cards/' . $card->id . '/edit') }}">
+                        <span class="glyphicon glyphicon-pencil"></span></a>
+                    <button class="btn btn-secondary" type="button"
+                            onclick="delete_card('{{ $card->id }}')">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </span>
+                <div class="hline"></div>
             </div>
         @endforeach
     </div>

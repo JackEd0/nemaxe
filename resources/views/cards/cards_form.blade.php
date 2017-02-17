@@ -17,10 +17,11 @@ $subbar = 'Cards';
 @stop
 
 @section('content')
-    <form class="" action="@if(isset($id)) {{ url('/cards/'. $id ) }}
-    @else {{ url('/cards') }} @endif" method="post">
+    <form class="form-group" action="@if(isset($id)) {{ url('/cards/'. $id ) }}
+        @else {{ url('/cards') }} @endif" method="post">
         {{ csrf_field() }}
         @if(isset($id)) {{ method_field('PUT') }} @endif
+        
         <select class="" name="card_nature">
             <option value="exercise">Exercise</option>
             <option value="solution">Solution</option>

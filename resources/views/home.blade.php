@@ -18,9 +18,11 @@ $subbar = 'Home';
 
 @section('content')
     @foreach($cards as $i => $card)
-        <div class="col-sm-6">
+        <div class="col-lg-6">
             <h3 class="ctitle text-capitalize">{{ $card->nature . ' #' . $card->number }}</h3>
-            <p><a href="{{ url('/cards/' . $card->id) }}"><img class="img-responsive" src="/img/{{ $card->category }}/{{ $card->content }}"></a></p>
+            <p><a href="{{ url('/cards/' . $card->id) }}">
+                <img class="img-responsive" src="/img/{{ $card->category }}/{{ $card->content }}">
+            </a></p>
             <a href="{{ url('/cards/' . $card->id) }}"><h3 class="">{{ $card->title }}.</h3></a>
             <p>
                 <csmall>Posted: April 25, 2014.</csmall>
