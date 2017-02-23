@@ -3,9 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
 
-class CreateCardsTable extends Migration
+class CreateExercisesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,19 +13,15 @@ class CreateCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('exercises', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('card_type_id')->unsigned();
-            $table->date('year');
+            $table->string('content');
             $table->integer('subject_id')->unsigned();
-            $table->integer('field_id')->unsigned();
             $table->integer('grade_id')->unsigned();
+            $table->time('duration')->default('01:00:00');
             $table->string('status')->default('publish');
-            $table->integer('user_id')->unsigned();
-            // nature is exercise or solution
-            // $table->string('nature');
-            // $table->integer('twin_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->default('1');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
@@ -39,6 +34,6 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('exercises');
     }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CardTypesTableSeeder extends Seeder
+class SubjectsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,9 +11,9 @@ class CardTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        $name_list = ['Baccalauréat', 'Proba', 'BEPCD'];
+        $name_list = ['Physique', 'Chimie', 'Mathématiques', 'Histoire'];
         for ($i = 0; $i < count($name_list); $i++) {
-            DB::table('card_types')->insert([
+            DB::table('subjects')->insert([
                 'name' => $name_list[$i],
             ]);
         }

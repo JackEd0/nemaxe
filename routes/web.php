@@ -16,15 +16,13 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
-Route::get('cards/{id}', 'CardController@show');
+Route::get('epreuves/{id}', 'CardController@show');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
     Route::resource('comments', 'CommentController');
     Route::resource('tags', 'TagController');
-    Route::resource('cards', 'CardController', ['except' =>
-        'show'
-    ]);
+    Route::resource('cards', 'CardController');
 
 
     Route::get('/logout', 'Auth\LoginController@logout');
