@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 class HomeComposer
 {
     public $cards;
-    public $card_types;
     public $comments_number = array();
 
     /**
@@ -16,16 +15,12 @@ class HomeComposer
      */
     public function __construct()
     {
-        $this->card_types = DB::table('card_types')->get();
         $this->cards = DB::table('cards')
-            ->where('cards.nature', 'exercise')
             ->join('users', 'users.id', '=', 'cards.user_id')
             ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
-            //->join('comments', 'comments.card_id', '=', 'cards.id')
             ->select('cards.*',
-                'card_types.name as category',
+                'card_types.name as card_type',
                 'users.username as author')
-                //'count(comments.id) as comment_number')
             ->inRandomOrder()
             ->limit(6)
             ->get();

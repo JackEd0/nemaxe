@@ -18,12 +18,13 @@ class CreateCardsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->integer('card_type_id')->unsigned();
+            // AAAA-MM-JJ
             $table->date('year');
             $table->integer('subject_id')->unsigned();
             $table->integer('field_id')->unsigned();
             $table->integer('grade_id')->unsigned();
             $table->string('status')->default('publish');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->default('1');;
             // nature is exercise or solution
             // $table->string('nature');
             // $table->integer('twin_id')->unsigned()->nullable();

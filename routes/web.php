@@ -23,7 +23,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('comments', 'CommentController');
     Route::resource('tags', 'TagController');
     Route::resource('cards', 'CardController');
-
+    Route::resource('card_types', 'CardTypeController');
+    Route::resource('chapters', 'ChapterController');
+    Route::resource('exercises', 'ExerciseController');
+    Route::resource('grades', 'GradeController');
+    Route::resource('subjects', 'SubjectController');
 
     Route::get('/logout', 'Auth\LoginController@logout');
 });

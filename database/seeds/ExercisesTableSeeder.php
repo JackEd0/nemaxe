@@ -25,7 +25,7 @@ class ExercisesTableSeeder extends Seeder
         $nature_list = array('exercise', 'solution');
         for ($i = 0; $i < 20; $i++) {
             DB::table('exercises')->insert([
-                'title' =>  $titleList[rand(0,count($title_list)-1)],
+                'title' =>  $title_list[rand(0,count($title_list)-1)],
                 'content' => $content_list,
                 'subject_id' => rand(1,4),
                 'grade_id' => rand(1,2),

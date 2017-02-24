@@ -5,9 +5,9 @@
  * Date: 2017-01-26
  * Time: 8:45 AM
  */
-$navbar = array('Home' => '', 'Skills' => '', 'Experiences' => '', 'Realisations' => '',
+$navbar = ['Home' => '', 'chapters' => '', 'Experiences' => '', 'Realisations' => '',
         'About' => '', 'Login' => '', 'Register' => '', 'Admin' => '', 'Profil' => '',
-        'Comments' => '', 'Cards' => '', 'Users' => '');
+        'Comments' => '', 'Cards' => '', 'Users' => ''];
 if (isset($subbar)) {
     $navbar[$subbar] = 'active';
 }
@@ -38,6 +38,7 @@ if (isset($subbar)) {
                         <li><a href="{{ url('/') }}">PROFIL</a></li>
                         <li><a href="{{ url('/cards') }}">POSTS</a></li>
                         <li><a href="{{ url('/') }}">COMMENTS</a></li>
+                        <li><a href="{{ url('/chapters') }}">CHAPTERS</a></li>
                         <li><a href="{{ url('/logout') }}">DISCONNECT</a></li>
                     </ul>
                 </li>

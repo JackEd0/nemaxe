@@ -24,6 +24,9 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'cards.cards_index', 'App\Http\ViewComposers\CardComposer@compose_index'
         );
+        view()->composer(
+            'chapters.chapters_index', 'App\Http\ViewComposers\ChapterComposer'
+        );
     }
 
     /**

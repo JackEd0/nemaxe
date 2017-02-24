@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             //$table->string('phone')->nullable();
             $table->string('password');
             $table->tinyInteger('active')->default('1');
-            $table->integer('user_type_id')->unsigned()->default('2');
+            $table->integer('user_type_id')->unsigned()->default('3');
             $table->rememberToken();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

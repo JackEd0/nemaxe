@@ -15,8 +15,8 @@ class CommentsTableSeeder extends Seeder
         for ($i = 0; $i < 20; ++$i) {
             DB::table('comments')->insert([
                 'content' => $commentList[rand(0,2)] . 'commentaire',
-                'user_id' => rand(1,50),
-                'card_id' => rand(1,50),
+                'user_id' => rand(1,20),
+                'card_id' => rand(1,20),
             ]);
         }
     }

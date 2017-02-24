@@ -16,7 +16,7 @@ class CreateExercisesTable extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('content');
+            $table->longText('content');
             $table->integer('subject_id')->unsigned();
             $table->integer('grade_id')->unsigned();
             $table->time('duration')->default('01:00:00');

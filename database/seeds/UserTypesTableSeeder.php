@@ -11,10 +11,10 @@ class UserTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        $nameList = array('admin', 'client');
-        for ($i = 0; $i < 2; $i++) {
+        $name_list = ['Administrateur', 'Editeur', 'Abonne'];
+        for ($i = 0; $i < count($name_list); $i++) {
             DB::table('user_types')->insert([
-                'name' => $nameList[$i],
+                'name' => $name_list[$i],
             ]);
         }
     }
