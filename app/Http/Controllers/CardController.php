@@ -35,7 +35,7 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('cards')->insertGetId([
+        DB::table('cards')->insert([
             'number' => DB::table('cards')->max('number') + 1,
             'title' => $request->input('title'),
             'content' => $request->input('content'),

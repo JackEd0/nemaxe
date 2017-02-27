@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ExerciseController extends Controller
 {
@@ -14,7 +15,21 @@ class ExerciseController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = DB::table('subjects')->get();
+        $grades = DB::table('grades')->get();
+        $exercises = DB::table('exercises')
+            ->join('subjects', 'subjects.id', '=', 'exercises.subject_id')
+            ->join('grades', 'grades.id', '=', 'exercises.grade_id')
+            ->join('users', 'users.id', '=', 'exercises.user_id')
+            ->select(
+                'exercises.*',
+                'subjects.name as subject_name',
+                'grades.name as grade_name',
+                'users.username as user_username'
+            )
+            ->get();
+
+        return view('exercises.exercises_index')->with(compact('subjects', 'grades', 'exercises'));
     }
 
     /**
@@ -24,7 +39,7 @@ class ExerciseController extends Controller
      */
     public function create()
     {
-        //
+        return view('exercises.exercises_form');
     }
 
     /**
@@ -35,7 +50,16 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('exercises')->insert([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'subject_id' => $request->input('subject_id'),
+            'grade_id' => $request->input('grade_id'),
+            'duration' => $request->input('duration'),
+            'status' => $request->input('status')
+        ]);
+
+        return redirect('/exercises');
     }
 
     /**
@@ -46,7 +70,7 @@ class ExerciseController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect('/exercises');
     }
 
     /**
@@ -57,7 +81,24 @@ class ExerciseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subjects = DB::table('subjects')->get();
+        $grades = DB::table('grades')->get();
+        $exercise = DB::table('exercises')
+            ->where('exercises.id', $id)
+            ->join('subjects', 'subjects.id', '=', 'exercises.subject_id')
+            ->join('grades', 'grades.id', '=', 'exercises.grade_id')
+            ->join('users', 'users.id', '=', 'exercises.user_id')
+            ->select(
+                'exercises.*',
+                'subjects.name as subject_name',
+                'grades.name as grade_name',
+                'users.username as user_username'
+            )
+            ->first();
+
+        return view('exercises.exercises_form')->with(compact(
+            'id', 'subjects', 'grades', 'exercise'
+        ));
     }
 
     /**
@@ -69,7 +110,18 @@ class ExerciseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('exercises')
+            ->where('id', $id)
+            ->update([
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'subject_id' => $request->input('subject_id'),
+                'grade_id' => $request->input('grade_id'),
+                'duration' => $request->input('duration'),
+                'status' => $request->input('status')
+            ]);
+
+        return redirect('/exercises');
     }
 
     /**
@@ -80,6 +132,7 @@ class ExerciseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('exercises')->where('id', $id)->delete();
+        return response()->json(['message' => 'Success!','state' => 200]);
     }
 }

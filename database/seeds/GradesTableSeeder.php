@@ -13,7 +13,7 @@ class GradesTableSeeder extends Seeder
     {
         $name_list = ['Terminal', 'Premiere', 'Seconde', 'Troisieme'];
         for ($i = 0; $i < count($name_list); $i++) {
-            DB::table('subjects')->insert([
+            DB::table('grades')->insert([
                 'name' => $name_list[$i],
             ]);
         }

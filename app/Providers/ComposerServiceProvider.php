@@ -27,6 +27,12 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'chapters.chapters_index', 'App\Http\ViewComposers\ChapterComposer'
         );
+        view()->composer(
+            'fields.fields_index', 'App\Http\ViewComposers\FieldComposer'
+        );
+        view()->composer(
+            'exercises.exercises_form', 'App\Http\ViewComposers\ExerciseComposer'
+        );
     }
 
     /**

@@ -3,18 +3,18 @@
  * Date: 23/02/2017
  */
 
-$subbar = 'chapters';
+$subbar = 'fields';
 ?>
 
 @extends('layouts.admin')
 
 @section('title')
-    Chapitres
+    Series
 @stop
 
 @section('content')
     <div class="content mb">
-        <h1 class="h1-xs">Ajouter un nouveau chapitre</h1>
+        <h1 class="h1-xs">Ajouter une nouvelle serie</h1>
         <br/>
         <div >
             <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token_field">
@@ -23,14 +23,10 @@ $subbar = 'chapters';
                        autofocus="" id="name">
             </div>
             <div class="col-sm-3">
-                <select class="form-control" id="subject_id">
-                    @foreach ($subjects as $subject)
-                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                    @endforeach
-                </select>
+                <input type="text" class="form-control" placeholder="Description" id="description">
             </div>
             <div class="col-sm-3">
-                <button type="button" class="btn btn-primary" onclick="store_chapter()">
+                <button type="button" class="btn btn-primary" onclick="store_field()">
                     Ajouter
                 </button>
             </div>
@@ -38,29 +34,28 @@ $subbar = 'chapters';
     </div>
     <hr/>
     <div class="content">
-        <input type="hidden" id="hidden_subjects" value='<?php echo json_encode($subjects) ?>'>
-        <h1 class="mmb">Chapitres</h1>
-        <div id="div_edit_chapter"></div>
+        <h1 class="mmb">Series</h1>
+        <div id="div_edit_field"></div>
 
-        <table class="table table-striped table-bordered table-hover" id="chapter_table" >
+        <table class="table table-striped table-bordered table-hover" id="field_table" >
             <thead>
             <tr>
                 <th>Nom</th>
-                <th>Matiere</th>
+                <th>Description</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($chapters as $chapter)
-                <tr id="tr_{{ $chapter->id}}">
-                    <td id="name_{{ $chapter->id}}">{{ $chapter->name }}</td>
-                    <td id="subject_name_{{ $chapter->id}}">{{ $chapter->subject_name }}</td>
+            @foreach ($fields as $field)
+                <tr id="tr_{{ $field->id}}">
+                    <td id="name_{{ $field->id}}">{{ $field->name }}</td>
+                    <td id="description_{{ $field->id}}">{{ $field->description }}</td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-default" title="Sauvegarder"
-                            onclick="edit_chapter({{ $chapter->id }}, {{ $chapter->subject_id }})">
+                            onclick="edit_field({{ $field->id }})">
                                 <span class="glyphicon glyphicon-floppy-disk"></span></a>
-                            <a class="btn btn-default" title="Supprimer" onclick="delete_chapter({{ $chapter->id}})">
+                            <a class="btn btn-default" title="Supprimer" onclick="delete_field({{ $field->id}})">
                                 <span class="glyphicon glyphicon-remove"></span></a>
                         </div>
                     </td>
@@ -69,5 +64,5 @@ $subbar = 'chapters';
             </tbody>
         </table>
     </div>
-    <script src="/js/views/chapters.js" ></script>
+    <script src="/js/views/fields.js" ></script>
 @stop

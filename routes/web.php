@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('cards', 'CardController');
     Route::resource('card_types', 'CardTypeController');
     Route::resource('chapters', 'ChapterController');
+    Route::resource('fields', 'FieldController');
     Route::resource('exercises', 'ExerciseController');
     Route::resource('grades', 'GradeController');
     Route::resource('subjects', 'SubjectController');

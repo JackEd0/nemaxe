@@ -29,7 +29,7 @@
                 <h4>Navigation</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="#">Home</a><br/>
+                    <a href="{{ url('/') }}">Home</a><br/>
                     <a href="#">About</a><br/>
                     <a href="#">Help</a><br/>
                 </p>

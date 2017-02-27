@@ -5,9 +5,9 @@
  * Date: 2017-01-26
  * Time: 8:45 AM
  */
-$navbar = ['Home' => '', 'chapters' => '', 'Experiences' => '', 'Realisations' => '',
-        'About' => '', 'Login' => '', 'Register' => '', 'Admin' => '', 'Profil' => '',
-        'Comments' => '', 'Cards' => '', 'Users' => ''];
+$navbar = ['home' => '', 'chapters' => '', 'fields' => '', 'grades' => '', 'card_types' => '',
+        'subjects' => '', 'login' => '', 'register' => '', 'admin' => '', 'profil' => '',
+        'comments' => '', 'cards' => '', 'users' => '', 'exercises' => ''];
 if (isset($subbar)) {
     $navbar[$subbar] = 'active';
 }
@@ -26,20 +26,26 @@ if (isset($subbar)) {
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="{{ $navbar['Home'] }}"><a href="{{ url('/') }}">HOME</a></li>
-                @if(!Auth::check())
-                <li class="{{ $navbar['Login'] }}"><a href="{{ url('/login') }}">LOGIN</a></li>
-                <li class="{{ $navbar['Register'] }}"><a href="{{ url('/register') }}">REGISTER</a></li>
+                <li class="{{ $navbar['cards'] }}"><a href="{{ url('/epreuves') }}">EPREUVES</a></li>
+                @if(!\Auth::check())
+                <li class="{{ $navbar['login'] }}"><a href="{{ url('/login') }}">LOGIN</a></li>
+                <li class="{{ $navbar['register'] }}"><a href="{{ url('/register') }}">REGISTER</a></li>
                 @else
-                <li class="dropdown {{ $navbar['Admin'] }}">
+                <li class="dropdown {{ $navbar['admin'] }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         {{ Auth::user()->username }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/') }}">PROFIL</a></li>
-                        <li><a href="{{ url('/cards') }}">POSTS</a></li>
+                        <li class="{{ $navbar['exercises'] }}"><a href="{{ url('/exercises') }}">ENONCES</a></li>
+                        <li class="{{ $navbar['cards'] }}"><a href="{{ url('/cards') }}">EPREUVES</a></li>
                         <li><a href="{{ url('/') }}">COMMENTS</a></li>
-                        <li><a href="{{ url('/chapters') }}">CHAPTERS</a></li>
-                        <li><a href="{{ url('/logout') }}">DISCONNECT</a></li>
+                        <li class="{{ $navbar['users'] }}"><a href="{{ url('/users') }}">UTILISATEURS</a></li>
+                        <li class="{{ $navbar['chapters'] }}"><a href="{{ url('/chapters') }}">CHAPTERS</a></li>
+                        <li class="{{ $navbar['fields'] }}"><a href="{{ url('/fields') }}">SERIES</a></li>
+                        <li class="{{ $navbar['grades'] }}"><a href="{{ url('/grades') }}">CLASSES</a></li>
+                        <li class="{{ $navbar['subjects'] }}"><a href="{{ url('/subjects') }}">MATIERES</a></li>
+                        <li class="{{ $navbar['card_types'] }}"><a href="{{ url('/card_types') }}">TYPES</a></li>
+                        <li><a href="{{ url('/logout') }}">DECONNEXION</a></li>
                     </ul>
                 </li>
                 @endif

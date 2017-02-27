@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class CardTypeController extends Controller
 {
@@ -14,7 +15,7 @@ class CardTypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('card_types.card_types_index')->with('card_types',  DB::table('card_types')->get());
     }
 
     /**
@@ -24,7 +25,7 @@ class CardTypeController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('card_types');
     }
 
     /**
@@ -35,7 +36,11 @@ class CardTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_card_type_id = DB::table('card_types')->insertGetId([
+            'name' => $request->input('name')
+        ]);
+
+        return response()->json(['message' => 'Success!','state' => 200, 'data' => $new_card_type_id]);
     }
 
     /**
@@ -46,7 +51,7 @@ class CardTypeController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect('card_types');
     }
 
     /**
@@ -57,7 +62,7 @@ class CardTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        return redirect('card_types');
     }
 
     /**
@@ -69,7 +74,11 @@ class CardTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('card_types')->where('id', $id)
+            ->update([
+                'name' => $request->input('name')
+            ]);
+        return response()->json(['message' => 'Success!','state' => 200]);
     }
 
     /**
@@ -80,6 +89,7 @@ class CardTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('card_types')->where('id', $id)->delete();
+        return response()->json(['message' => 'Success!','state' => 200]);
     }
 }

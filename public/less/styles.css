@@ -45,6 +45,22 @@ body {
 .centered {
   text-align: center;
 }
+div[id$='_filter'] > label > input {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
 .dmbutton {
   background: rgba(0, 0, 0, 0);
   border: 1px solid #ffffff;
@@ -195,6 +211,11 @@ csmall2 {
   display: block;
   width: 100%;
   height: auto;
+}
+@media screen and (max-width: 340px) {
+  .form-control {
+    margin: 4px 0;
+  }
 }
 #input_search {
   width: 30px;

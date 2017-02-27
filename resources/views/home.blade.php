@@ -5,7 +5,6 @@
  * Date: 26/01/2017
  * Time: 13:50
  */
-$subbar = 'Home';
 ?>
 @extends('layouts.master')
 @section('title')

@@ -18,18 +18,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
     <script> window.jQuery || document.write('<script src="/js/jquery-3.1.1.min.js"><\/script>')</script>
 
-    <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" ></script>
-
     <!-- Bootstrap core js -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="/js/bootstrap.min.js"><\/script>')}</script>
+
+    <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" ></script>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/less/style.css" rel="stylesheet">
+    <link href="/less/styles.css" rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
 
 
@@ -46,16 +46,8 @@
     <!-- Fixed navbar -->
     @include('layouts.menu')
 
-    <div id="blue">
-        <div class="container">
-            <div class="row">
-                <h3 class="text-capitalize">@yield('blue-wrap')</h3>
-            </div><!-- /row -->
-        </div> <!-- /container -->
-    </div><!-- /blue -->
-
     <!-- Content -->
-    <div class="container-fluid mt">
+    <div class="container-fluid mtb">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="row">

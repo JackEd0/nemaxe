@@ -1,10 +1,10 @@
 $(document).ready(function(){
-    $('#chapter_table').DataTable({
+    $('#subject_table').DataTable({
         ordering: true,
         searching: true,
         columnDefs: [
-            { orderable: false, "targets": 2 },
-            { searchable: false, "targets": 2}
+            { orderable: false, "targets": 1 },
+            { searchable: false, "targets": 1}
         ],
         language: {
             processing:     "Traitement en cours...",
@@ -31,55 +31,37 @@ $(document).ready(function(){
     });
 });
 
-function edit_chapter(id, subject_id) {
-    var subjects = $("#hidden_subjects").val();
-    var chapter_name = document.getElementById( "name_" + id ).textContent;
-    subjects = JSON.parse(subjects);
-    var div_edit_chapter =
+function edit_subject(id) {
+    var subject_name = document.getElementById( "name_" + id ).textContent;
+    var div_edit_subject =
     '<div class="col-sm-3">' +
         '<input type="text" class="form-control" placeholder="Nom"' +
-               'autofocus="" id="chapter_name" value="' + chapter_name + '">' +
+               'autofocus="" id="subject_name" value="' + subject_name + '">' +
     '</div>' +
     '<div class="col-sm-3">' +
-        '<select class="form-control" id="chapter_subject_id">';
-        for (var i = 0; i < subjects.length; i++) {
-            div_edit_chapter += '<option value="' + subjects[i]['id'] + '"';
-            if (subjects[i]['id'] == subject_id) {
-                div_edit_chapter += 'selected';
-            }
-            div_edit_chapter += ' >' + subjects[i]['name'] +
-            '</option>';
-        }
-        div_edit_chapter += '</select>' +
-    '</div>' +
-    '<div class="col-sm-3">' +
-        '<button type="button" class="btn btn-primary" onclick="update_chapter(' + id + ')" style="margin-right: 10px;">' +
+        '<button type="button" class="btn btn-primary" onclick="update_subject(' + id + ')" style="margin-right: 10px;">' +
             'Modifier' +
         '</button>' +
-        '<button type="button" class="btn btn-danger" onclick="remove_div_chapter()">' +
+        '<button type="button" class="btn btn-danger" onclick="remove_div_subject()">' +
             'Annuler' +
         '</button>' +
     '</div>';
-    $("#div_edit_chapter").html(div_edit_chapter);
-    $("#div_edit_chapter").css('margin-bottom', '90px');
+    $("#div_edit_subject").html(div_edit_subject);
+    $("#div_edit_subject").css('margin-bottom', '90px');
 }
 
-function update_chapter(id) {
-    var chapter_name = document.getElementById( "chapter_name" ).value;
-    var chapter_subject_id = document.getElementById("chapter_subject_id").value;
-    var chapter_subject_name = $("#chapter_subject_id option:selected").text();
+function update_subject(id) {
+    var subject_name = document.getElementById( "subject_name" ).value;
     $.ajax({
         url: window.location.href + "/" + id,
         type: 'POST',
         data: {
-            name: chapter_name,
-            subject_id: chapter_subject_id,
-            _method: "PUT", _token: $("#token_field").val()
+            name: subject_name,
+            _method: "PUT", _token: $("#token_subject").val()
         },
         dataType: 'json',
         success: function (response) {
-            $("#name_" + id).text(chapter_name);
-            $("#subject_name_" + id).text(chapter_subject_name);
+            $("#name_" + id).text(subject_name);
             var initial_color = $("#tr_" + id).css('background-color');
             $("#tr_" + id).css({'background-color': '#93FF93'});
             setTimeout(function () {
@@ -92,12 +74,12 @@ function update_chapter(id) {
     });
 }
 
-function remove_div_chapter() {
-    $("#div_edit_chapter").html('');
-    $("#div_edit_chapter").css('margin-bottom', '0');
+function remove_div_subject() {
+    $("#div_edit_subject").html('');
+    $("#div_edit_subject").css('margin-bottom', '0');
 }
 
-function delete_chapter(id) {
+function delete_subject(id) {
     if(!confirm(
         'Attention, toutes les données de ce champ seront supprimées !' +
         '"Vous êtes sûr de vouloir continuer ?'
@@ -107,7 +89,7 @@ function delete_chapter(id) {
     $.ajax({
         url: window.location.href + "/" + id,
         type: 'POST',
-        data: {_method: "DELETE", _token: $("#token_field").val()},
+        data: {_method: "DELETE", _token: $("#token_subject").val()},
         dataType: 'json',
         success: function (response) {
             var deletedDivId = "#tr_" + id;
@@ -122,33 +104,30 @@ function delete_chapter(id) {
     });
 }
 
-function store_chapter() {
-    var chapter_name = document.getElementById( "name" ).value;
-    var chapter_subject_id = document.getElementById("subject_id").value;
-    var chapter_subject_name = $("#subject_id option:selected").text();
+function store_subject() {
+    var subject_name = document.getElementById( "name" ).value;
     $.ajax({
         url: window.location.href,
         type: 'POST',
-        data: {name: chapter_name, subject_id: chapter_subject_id, _token: $("#token_field").val()},
+        data: {name: subject_name, _token: $("#token_subject").val()},
         dataType: 'json',
         success: function (response) {
-            var new_chapter_id = response['data'];
-            var new_chapter =
-            '<tr id="tr_' + new_chapter_id +'">' +
-                '<td id="name_' + new_chapter_id + '">' + chapter_name + '</td>' +
-                '<td id="subject_name_' + new_chapter_id + '">' + chapter_subject_name + '</td>' +
+            var new_subject_id = response['data'];
+            var new_subject =
+            '<tr id="tr_' + new_subject_id +'">' +
+                '<td id="name_' + new_subject_id + '">' + subject_name + '</td>' +
                 '<td>' +
                     '<div class="btn-group">' +
                         '<a class="btn btn-default" title="Sauvegarder"' +
-                        'onclick="edit_chapter(' + new_chapter_id + ', ' + chapter_subject_id + ')">' +
+                        'onclick="edit_subject(' + new_subject_id + ')">' +
                             '<span class="glyphicon glyphicon-floppy-disk"></span></a>' +
-                        '<a class="btn btn-default" title="Supprimer" onclick="delete_chapter(' + new_chapter_id + ')">' +
+                        '<a class="btn btn-default" title="Supprimer" onclick="delete_subject(' + new_subject_id + ')">' +
                             '<span class="glyphicon glyphicon-remove"></span></a>' +
                     '</div>' +
                 '</td>' +
             '</tr>';
 
-            $("tbody").prepend(new_chapter);
+            $("tbody").prepend(new_subject);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('POST: ', jqXHR, textStatus, errorThrown);

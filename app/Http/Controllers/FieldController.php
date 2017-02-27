@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class FieldController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')
-        ->where('users.id', '<>', 1)
-        ->join('user_types', 'user_types.id', '=', 'users.user_type_id')
-        ->select(
-            'users.*',
-            'user_types.name as user_type_name')
-        ->get();
-        $user_types = DB::table('user_types')->get();
-        return view('users.users_index')->with(compact('users', 'user_types'));
+        return view('fields.fields_index');
     }
 
     /**
@@ -33,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return redirect('users');
+        return redirect('fields');
     }
 
     /**
@@ -44,7 +36,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('users');
+        $new_field_id = DB::table('fields')->insertGetId([
+            'name' => $request->input('name'), 'description' => $request->input('description')
+        ]);
+
+        return response()->json(['message' => 'Success!','state' => 200, 'data' => $new_field_id]);
     }
 
     /**
@@ -55,7 +51,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return redirect('users');
+        return redirect('fields');
     }
 
     /**
@@ -66,7 +62,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return redirect('users');
+        return redirect('fields');
     }
 
     /**
@@ -78,9 +74,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('users')->where('id', $id)
+        DB::table('fields')->where('id', $id)
             ->update([
-                'user_type_id' => $request->input('user_type_id')
+                'name' => $request->input('name'),
+                'description' => $request->input('description')
             ]);
         return response()->json(['message' => 'Success!','state' => 200]);
     }
@@ -93,7 +90,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('users')->where('id', $id)->delete();
+        DB::table('fields')->where('id', $id)->delete();
         return response()->json(['message' => 'Success!','state' => 200]);
     }
 }

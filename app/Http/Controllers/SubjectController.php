@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class SubjectController extends Controller
 {
@@ -14,7 +15,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        return view('subjects.subjects_index')->with('subjects',  DB::table('subjects')->get());
     }
 
     /**
@@ -24,7 +25,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('subjects');
     }
 
     /**
@@ -35,7 +36,11 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_subject_id = DB::table('subjects')->insertGetId([
+            'name' => $request->input('name')
+        ]);
+
+        return response()->json(['message' => 'Success!','state' => 200, 'data' => $new_subject_id]);
     }
 
     /**
@@ -46,7 +51,7 @@ class SubjectController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect('subjects');
     }
 
     /**
@@ -57,7 +62,7 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        return redirect('subjects');
     }
 
     /**
@@ -69,7 +74,11 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('subjects')->where('id', $id)
+            ->update([
+                'name' => $request->input('name')
+            ]);
+        return response()->json(['message' => 'Success!','state' => 200]);
     }
 
     /**
@@ -80,6 +89,7 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('subjects')->where('id', $id)->delete();
+        return response()->json(['message' => 'Success!','state' => 200]);
     }
 }
