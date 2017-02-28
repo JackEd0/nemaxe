@@ -1,6 +1,6 @@
 <?php
 
-$subbar = 'Cards';
+$subbar = 'cards';
 ?>
 @extends('layouts.master')
 @section('title')

@@ -21,7 +21,10 @@ class ExercisesTableSeeder extends Seeder
             'Sed cautela nimia in peiores haeserat plagas, ut narrabimus postea, aemulis ' .
             'consarcinantibus insidias graves apud Constantium, cetera medium principem sed ' .
             'siquid auribus eius huius modi quivis infudisset ignotus, acerbum et inplacabilem ' .
-            'et in hoc causarum titulo dissimilem sui.';
+            'et in hoc causarum titulo dissimilem sui.<br />' .
+            '<strong>Questions</strong><br /><ol style="margin-left:5%;">' .
+            '<li>Lorem ipsum dolor sit amet</li><li>Lorem ipsum dolor sit amet consectetur' .
+            'adipiscing elit</li></ol>';
         $nature_list = array('exercise', 'solution');
         for ($i = 0; $i < 20; $i++) {
             DB::table('exercises')->insert([

@@ -1,10 +1,38 @@
-# Nemaxe
-Version: 1.1.0
-Nemaxe : php project to create and share exams.
+## [Nemaxe](https://github.com/JackEd0/nemaxe)
 
-Made by [Jack](linkURL) With Laravel (PHP)
+Nemaxe is web interface that allow users to create and test school exercises.
+
+Curent version: 1.1.1
+
+
+### Features
+
+ - Login / Register
+ - Browser exercises
+ - Create/Read/Update/Delete subjects
+ - CRUDE classes
+ - Manage users
+
+### Technologies used
+
+```
+├────── php
+│   ├── Laravel
+│   └── mysql
+├── css
+│   ├── Less
+│   └── Bootstrap
+└── js
+    ├── Jquery
+    └── Datatable
+```
+
+### Creator
+
+**Jack**: <https://github.com/JackEd0>
+
+### Notes
 
 Started: 26 January 2017
-Last updated: 27 February 2017
-
-X days (43hrs) of work
+Last updated: 28 February 2017
+44hrs of work

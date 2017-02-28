@@ -21,6 +21,7 @@
             <h3 class="ctitle text-capitalize">
                 <a href="{{ url('/epreuves/' . $card->id) }}">{{ $card->title }}</a>
             </h3>
+            <p><strong>{{ $exercises[$i]->title }}</strong></p>
             <p class="text-justify">{!! $exercises[$i]->content !!}</p>
             <p>
                 <csmall>Posted: {{ $card->created_at }}</csmall>

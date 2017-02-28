@@ -35,10 +35,8 @@ if (isset($subbar)) {
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         {{ Auth::user()->username }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('/') }}">PROFIL</a></li>
                         <li class="{{ $navbar['exercises'] }}"><a href="{{ url('/exercises') }}">ENONCES</a></li>
                         <li class="{{ $navbar['cards'] }}"><a href="{{ url('/cards') }}">EPREUVES</a></li>
-                        <li><a href="{{ url('/') }}">COMMENTS</a></li>
                         <li class="{{ $navbar['users'] }}"><a href="{{ url('/users') }}">UTILISATEURS</a></li>
                         <li class="{{ $navbar['chapters'] }}"><a href="{{ url('/chapters') }}">CHAPTERS</a></li>
                         <li class="{{ $navbar['fields'] }}"><a href="{{ url('/fields') }}">SERIES</a></li>
@@ -46,6 +44,10 @@ if (isset($subbar)) {
                         <li class="{{ $navbar['subjects'] }}"><a href="{{ url('/subjects') }}">MATIERES</a></li>
                         <li class="{{ $navbar['card_types'] }}"><a href="{{ url('/card_types') }}">TYPES</a></li>
                         <li><a href="{{ url('/logout') }}">DECONNEXION</a></li>
+                        @if (Auth::user()->user_type_id == 1)
+                            <li><a href="{{ url('/') }}">PROFIL</a></li>
+                            <li><a href="{{ url('/') }}">COMMENTS</a></li>
+                        @endif
                     </ul>
                 </li>
                 @endif
