@@ -272,11 +272,13 @@ class ComposerStaticInit22f73c468bd4bfbb6c159ed61197c872
     );
 
     public static $classMap = array (
+        'CardExercisesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CardExercisesTableSeeder.php',
         'CardTagsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CardTagsTableSeeder.php',
         'CardTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CardTypesTableSeeder.php',
         'CardsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CardsTableSeeder.php',
         'ChaptersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ChaptersTableSeeder.php',
         'CommentsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CommentsTableSeeder.php',
+        'CreateCardExercisesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_27_232654_create_card_exercises_table.php',
         'CreateCardTagsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_31_180011_create_card_tags_table.php',
         'CreateCardTypesTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_26_160654_create_card_types_table.php',
         'CreateCardsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_26_160637_create_cards_table.php',

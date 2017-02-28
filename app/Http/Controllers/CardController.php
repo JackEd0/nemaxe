@@ -60,12 +60,18 @@ class CardController extends Controller
             ->join('users', 'users.id', '=', 'cards.user_id')
             ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
             ->select('cards.*',
-                'card_types.name as category',
-                'users.username as author')
+                'card_types.name as card_type_name',
+                'users.username as user_username')
             ->first();
+        $exercises = DB::table('card_exercises')
+            ->where('card_id', $card->id)
+            ->join('exercises', 'exercises.id', '=', 'card_exercises.exercise_id')
+            ->select('exercises.*')
+            ->get();
+        // $exercises = DB::table('exercises')->where('id', $temp_exercises->exercise_id)->first();
         $comments_number = DB::table('comments')->where('card_id', $id)->count();
 
-        return view('cards.cards_show')->with(compact('card', 'comments_number'));
+        return view('cards.cards_show')->with(compact('card', 'comments_number', 'exercises'));
     }
 
     /**

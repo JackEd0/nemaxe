@@ -6,11 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CardExercisesTableSeeder' => $baseDir . '/database/seeds/CardExercisesTableSeeder.php',
     'CardTagsTableSeeder' => $baseDir . '/database/seeds/CardTagsTableSeeder.php',
     'CardTypesTableSeeder' => $baseDir . '/database/seeds/CardTypesTableSeeder.php',
     'CardsTableSeeder' => $baseDir . '/database/seeds/CardsTableSeeder.php',
     'ChaptersTableSeeder' => $baseDir . '/database/seeds/ChaptersTableSeeder.php',
     'CommentsTableSeeder' => $baseDir . '/database/seeds/CommentsTableSeeder.php',
+    'CreateCardExercisesTable' => $baseDir . '/database/migrations/2017_02_27_232654_create_card_exercises_table.php',
     'CreateCardTagsTable' => $baseDir . '/database/migrations/2017_01_31_180011_create_card_tags_table.php',
     'CreateCardTypesTable' => $baseDir . '/database/migrations/2017_01_26_160654_create_card_types_table.php',
     'CreateCardsTable' => $baseDir . '/database/migrations/2017_01_26_160637_create_cards_table.php',

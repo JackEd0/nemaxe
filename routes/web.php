@@ -17,6 +17,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 
 Route::get('epreuves/{id}', 'CardController@show');
+Route::get('epreuves', 'CardController@index');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');

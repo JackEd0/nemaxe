@@ -12,23 +12,18 @@ $subbar = 'Cards';
 @stop
 
 @section('content')
-    <h3 class="ctitle text-capitalize">{{ $card->nature . ' #' . $card->number }}</h3>
-    <p><img class="img-responsive" src="/img/{{ $card->category . '/' . $card->content }}"></p>
-    <h3 class="">{{ $card->title }}.</h3>
+    <h3 class="ctitle text-capitalize">#{{ $card->id }} {{ $card->title }}</h3>
+    @foreach ($exercises as $exercise)
+        <p><strong>{{ $exercise->title }}</strong></p>
+        <p class="text-justify">{!! $exercise->content !!}</p>
+    @endforeach
     <p>
-        <csmall>Posted: April 25, 2014.</csmall>
+        <csmall>Posted: {{ $card->created_at }}.</csmall>
         |
-        <csmall2>By: {{ $card->author . ' - ' . $comments_number }} Comments</csmall2>
+        <csmall2>By: {{ $card->user_username . ' - ' . $comments_number }} Comments</csmall2>
         |
-        <csmall><a href="#">{{ $card->category }}</a></csmall>
+        <csmall><a href="#">{{ $card->card_type_name }}</a></csmall>
     </p>
-    @if ($card->twin_id != null)
-        @if ($card->nature == 'exercise')
-            <a href="#">See solution</i></a>
-        @else
-            <a href="#">See enoncee</i></a>
-        @endif
-    @endif
     <div class="spacing"></div>
     <h6>SHARE:</h6>
     <p class="share">
