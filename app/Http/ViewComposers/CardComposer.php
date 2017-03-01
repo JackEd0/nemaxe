@@ -8,21 +8,20 @@ use Illuminate\Support\Facades\DB;
 class CardComposer
 {
     public $cards;
-    public $comments_number = array();
+    public $comments_number = [];
     public $exercises = [];
+    public $subjects;
+    public $card_types;
+    public $fields;
+    public $grades;
+    public $status;
 
     /**
      * CardComposer constructor.
      */
     public function __construct()
     {
-        $temp_exercises = DB::select('SELECT DISTINCT card_id FROM card_exercises ');
-        $published_card = [];
-        foreach ($temp_exercises as $value) {
-            $published_card[] = $value->card_id;
-        }
         $this->cards = DB::table('cards')
-            ->whereIn('cards.id', $published_card)
             ->join('users', 'users.id', '=', 'cards.user_id')
             ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
             ->select('cards.*',
@@ -34,6 +33,12 @@ class CardComposer
             $temp_exercises = DB::table('card_exercises')->where('card_id', $card->id)->first();
             $this->exercises[] = DB::table('exercises')->where('id', $temp_exercises->exercise_id)->first();
         }
+
+        $this->subjects = DB::table('subjects')->get();
+        $this->card_types = DB::table('card_types')->get();
+        $this->fields = DB::table('fields')->get();
+        $this->grades = DB::table('grades')->get();
+        $this->status = ['pubish' => 'Publie', 'private' => 'Prive'];
     }
 
     /**
@@ -44,10 +49,12 @@ class CardComposer
      */
     public function compose(View $view)
     {
-        $cards = $this->cards;
-        $categories = $this->categories;
-        $card_number = $this->card_number;
-        $view->with(compact('cards', 'categories', 'card_number'));
+        $subjects = $this->subjects;
+        $card_types = $this->card_types;
+        $fields = $this->fields;
+        $grades = $this->grades;
+        $status = $this->status;
+        $view->with(compact('subjects', 'card_types', 'fields', 'grades', 'status'));
     }
 
     /**

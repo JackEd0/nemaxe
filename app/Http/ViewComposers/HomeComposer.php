@@ -17,13 +17,7 @@ class HomeComposer
      */
     public function __construct()
     {
-        $temp_exercises = DB::select('SELECT DISTINCT card_id FROM card_exercises ');
-        $published_card = [];
-        foreach ($temp_exercises as $value) {
-            $published_card[] = $value->card_id;
-        }
         $this->cards = DB::table('cards')
-            ->whereIn('cards.id', $published_card)
             ->join('users', 'users.id', '=', 'cards.user_id')
             ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
             ->select('cards.*',

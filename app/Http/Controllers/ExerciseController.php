@@ -85,15 +85,6 @@ class ExerciseController extends Controller
         $grades = DB::table('grades')->get();
         $exercise = DB::table('exercises')
             ->where('exercises.id', $id)
-            ->join('subjects', 'subjects.id', '=', 'exercises.subject_id')
-            ->join('grades', 'grades.id', '=', 'exercises.grade_id')
-            ->join('users', 'users.id', '=', 'exercises.user_id')
-            ->select(
-                'exercises.*',
-                'subjects.name as subject_name',
-                'grades.name as grade_name',
-                'users.username as user_username'
-            )
             ->first();
 
         return view('exercises.exercises_form')->with(compact(

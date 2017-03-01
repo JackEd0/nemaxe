@@ -82,18 +82,11 @@ class CardController extends Controller
      */
     public function edit($id)
     {
-        $card = DB::table('cards')->where('cards.id', $id)
-            ->join('users', 'users.id', '=', 'cards.user_id')
-            ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
-            ->select('cards.*',
-                'card_types.name as category',
-                'users.username as author')
+        $card = DB::table('cards')
+            ->where('cards.id', $id)
             ->first();
-        $comments_number = DB::table('comments')->where('card_id', $id)->count();
 
-        return view('cards.cards_form')->with(compact(
-            'id', 'card', 'comments_number'
-        ));
+        return view('cards.cards_form')->with(compact('id', 'card'));
     }
 
     /**

@@ -16,6 +16,7 @@ $subbar = 'cards';
     @foreach ($exercises as $exercise)
         <p><strong>{{ $exercise->title }}</strong></p>
         <p class="text-justify">{!! $exercise->content !!}</p>
+        <br />
     @endforeach
     <p>
         <csmall>Posted: {{ $card->created_at }}.</csmall>
