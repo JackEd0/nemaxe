@@ -1,0 +1,21 @@
+TODO:
+- Update confirmation everywhere(fields.js)
+- Comment code(php/js doc)
+- Js verification on input texts
+- Date format in exercises
+- Add solution link to an exercise
+- Add Exercice Number
+- Add quick links to help resolve the exercise
+- Search history 
+- Comments option
+- Likes
+- language package
+
+
+
+
+
+NOTES:
+- cd applications/g | /public_h
+- php artisan migrate:refresh --seed
+- Inspired of 9gag
