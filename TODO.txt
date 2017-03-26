@@ -1,7 +1,7 @@
 TODO:
 - Update confirmation everywhere(fields.js)
 - Comment code(php/js doc)
-- Js verification on input texts
+- Js verification on input texts (not null, etc)
 - Date format in exercises
 - Add solution link to an exercise
 - Add Exercice Number
