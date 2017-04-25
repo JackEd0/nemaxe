@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('exercises', 'ExerciseController');
     Route::resource('grades', 'GradeController');
     Route::resource('subjects', 'SubjectController');
+    Route::resource('questions', 'QuestionController');
 
     Route::get('/logout', 'Auth\LoginController@logout');
 });

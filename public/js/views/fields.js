@@ -121,7 +121,7 @@ function store_field() {
         data: {name: field_name, description: field_description, _token: $("#token_field").val()},
         dataType: 'json',
         success: function (response) {
-            var new_field_id = response['data'];
+            var new_field_id = response.data;
             var new_field =
             '<tr id="tr_' + new_field_id +'">' +
                 '<td id="name_' + new_field_id + '">' + field_name + '</td>' +

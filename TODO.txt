@@ -10,8 +10,9 @@ TODO:
 - Comments option
 - Likes
 - language package
+- add questions tables for exercises
 
-
+19h-
 
 
 

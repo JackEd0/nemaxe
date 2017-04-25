@@ -18,8 +18,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ChaptersTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
         $this->call(ExercisesTableSeeder::class);
+        $this->call(ExercisesQuestionsEqsTableSeeder::class);
         $this->call(FieldsTableSeeder::class);
         $this->call(GradesTableSeeder::class);
+        $this->call(QuestionsTableSeeder::class);
         $this->call(SubjectsTableSeeder::class);
         $this->call(TagsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
