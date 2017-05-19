@@ -9,8 +9,8 @@ class ExerciseComposer
 {
     public $subjects;
     public $grades;
-    public $durations;
-    public $status;
+    // public $durations;
+    // public $status;
 
     /**
      * ChapterComposer constructor.
@@ -19,11 +19,11 @@ class ExerciseComposer
     {
         $this->subjects = DB::table('subjects')->get();
         $this->grades = DB::table('grades')->get();
-        $this->durations = ['05:00' => '5'];
-        for ($i=10; $i <= 60; $i=$i+5) {
-            $this->durations[$i . ':00'] = $i;
-        }
-        $this->status = ['pubish' => 'Publie', 'private' => 'Prive'];
+        // $this->durations = ['05:00' => '5'];
+        // for ($i=10; $i <= 60; $i=$i+5) {
+        //     $this->durations[$i . ':00'] = $i;
+        // }
+        // $this->status = ['pubish' => 'Publie', 'private' => 'Prive'];
     }
 
     /**
@@ -36,9 +36,10 @@ class ExerciseComposer
     {
         $subjects = $this->subjects;
         $grades = $this->grades;
-        $durations = $this->durations;
-        $status = $this->status;
-        $view->with(compact('subjects', 'grades', 'durations', 'status'));
+        // $durations = $this->durations;
+        // $status = $this->status;
+        // $view->with(compact('subjects', 'grades', 'durations', 'status'));
+        $view->with(compact('subjects', 'grades'));
     }
 
 }

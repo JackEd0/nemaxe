@@ -17,11 +17,12 @@ class CardsTableSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             //Ajout de fiches de type compris entre 1 et 7
             DB::table('cards')->insert([
-                'title' =>  $titleList[rand(0,2)] . ' of ' . '199' . $i%9,
+                // 'title' =>  $titleList[rand(0,2)] . ' of ' . '199' . $i%9,
                 'card_type_id' => ($i % 3) + 1,
-                'year' => '199' . rand(0,9) . '-01-01',
+                'year' => '199' . rand(0,9),
                 'subject_id' => rand(1,3),
                 'field_id' => rand(1,3),
+                'duration' => '0' . rand(1,3) . ':00',
                 'grade_id' => rand(1,3)
             ]);
         }

@@ -17,9 +17,9 @@ class QuestionsTableSeeder extends Seeder
             'adipiscing elit',
             'Lorem ipsum dolor sit amet consectetur adipiscing elit',
         ];
-        foreach ($descriptions as $description) {
+        for ($i=0; $i < 20; $i++) {
             DB::table('questions')->insert([
-                'description' => $description
+                'description' => $descriptions[rand(0,3)]
             ]);
         }
     }

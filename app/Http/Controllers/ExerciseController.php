@@ -20,12 +20,12 @@ class ExerciseController extends Controller
         $exercises = DB::table('exercises')
             ->join('subjects', 'subjects.id', '=', 'exercises.subject_id')
             ->join('grades', 'grades.id', '=', 'exercises.grade_id')
-            ->join('users', 'users.id', '=', 'exercises.user_id')
+            // ->join('users', 'users.id', '=', 'exercises.user_id')
             ->select(
                 'exercises.*',
                 'subjects.name as subject_name',
-                'grades.name as grade_name',
-                'users.username as user_username'
+                'grades.name as grade_name'
+                // 'users.username as user_username'
             )
             ->get();
 
@@ -51,12 +51,12 @@ class ExerciseController extends Controller
     public function store(Request $request)
     {
         DB::table('exercises')->insert([
-            'title' => $request->input('title'),
+            // 'title' => $request->input('title'),
             'content' => $request->input('content'),
             'subject_id' => $request->input('subject_id'),
             'grade_id' => $request->input('grade_id'),
-            'duration' => $request->input('duration'),
-            'status' => $request->input('status')
+            // 'duration' => $request->input('duration'),
+            // 'status' => $request->input('status')
         ]);
 
         return redirect('/exercises');
@@ -104,12 +104,12 @@ class ExerciseController extends Controller
         DB::table('exercises')
             ->where('id', $id)
             ->update([
-                'title' => $request->input('title'),
+                // 'title' => $request->input('title'),
                 'content' => $request->input('content'),
                 'subject_id' => $request->input('subject_id'),
                 'grade_id' => $request->input('grade_id'),
-                'duration' => $request->input('duration'),
-                'status' => $request->input('status')
+                // 'duration' => $request->input('duration'),
+                // 'status' => $request->input('status')
             ]);
 
         return redirect('/exercises');

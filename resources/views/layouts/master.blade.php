@@ -34,11 +34,13 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/less/styles.css" rel="stylesheet">
-
+    <link href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/views.css" rel="stylesheet">
     <!-- Bootstrap core js -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="/js/bootstrap.min.js"><\/script>')}</script>
+    <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" ></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="/js/ie8-responsive-file-warning.js"></script><![endif]-->

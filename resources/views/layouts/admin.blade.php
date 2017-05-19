@@ -1,8 +1,3 @@
-<?php
-/**
- * Date: 2017-02-23
- */
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -29,7 +24,8 @@
 
     <!-- Custom styles for this template -->
     {{-- <link href="/css/font-awesome.min.css" rel="stylesheet"> --}}
-    <link href="/less/styles.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/views.css" rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
 
 

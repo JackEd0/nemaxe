@@ -33,10 +33,15 @@ $(document).ready(function(){
 
 function edit_grade(id) {
     var grade_name = document.getElementById( "name_" + id ).textContent;
+    var grade_short_name = document.getElementById( "short_name_" + id ).textContent;
     var div_edit_grade =
     '<div class="col-sm-3">' +
         '<input type="text" class="form-control" placeholder="Nom"' +
                'autofocus="" id="grade_name" value="' + grade_name + '">' +
+    '</div>' +
+    '<div class="col-sm-3">' +
+        '<input type="text" class="form-control" placeholder="Nom abreger"' +
+               'autofocus="" id="grade_short_name" value="' + grade_short_name + '">' +
     '</div>' +
     '<div class="col-sm-3">' +
         '<button type="button" class="btn btn-primary" onclick="update_grade(' + id + ')" style="margin-right: 10px;">' +
@@ -52,16 +57,19 @@ function edit_grade(id) {
 
 function update_grade(id) {
     var grade_name = document.getElementById( "grade_name" ).value;
+    var grade_short_name = document.getElementById( "grade_short_name" ).value;
     $.ajax({
         url: window.location.href + "/" + id,
         type: 'POST',
         data: {
             name: grade_name,
+            short_name: grade_short_name,
             _method: "PUT", _token: $("#token_grade").val()
         },
         dataType: 'json',
         success: function (response) {
             $("#name_" + id).text(grade_name);
+            $("#short_name_" + id).text(grade_short_name);
             var initial_color = $("#tr_" + id).css('background-color');
             $("#tr_" + id).css({'background-color': '#93FF93'});
             setTimeout(function () {
@@ -106,16 +114,22 @@ function delete_grade(id) {
 
 function store_grade() {
     var grade_name = document.getElementById( "name" ).value;
+    var grade_short_name = document.getElementById( "short_name" ).value;
     $.ajax({
         url: window.location.href,
         type: 'POST',
-        data: {name: grade_name, _token: $("#token_grade").val()},
+        data: {
+            name: grade_name,
+            short_name: grade_short_name,
+            _token: $("#token_grade").val()
+        },
         dataType: 'json',
         success: function (response) {
-            var new_grade_id = response['data'];
+            var new_grade_id = response.data;
             var new_grade =
             '<tr id="tr_' + new_grade_id +'">' +
                 '<td id="name_' + new_grade_id + '">' + grade_name + '</td>' +
+                '<td id="short_name_' + new_grade_id + '">' + grade_short_name + '</td>' +
                 '<td>' +
                     '<div class="btn-group">' +
                         '<a class="btn btn-default" title="Sauvegarder"' +

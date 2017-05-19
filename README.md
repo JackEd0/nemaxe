@@ -2,7 +2,7 @@
 
 Nemaxe is web interface that allow users to create and test school exercises.
 
-Curent version: 1.1.1
+Curent version: 1.2.1
 
 
 ### Features
@@ -34,5 +34,5 @@ Curent version: 1.1.1
 ### Notes
 
 Started: 26 January 2017
-Last updated: 28 February 2017
-44hrs of work
+Last updated: 18 May 2017
+50hrs of work

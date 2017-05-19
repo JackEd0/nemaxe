@@ -16,15 +16,16 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            // $table->string('title');
             $table->integer('card_type_id')->unsigned();
             // AAAA-MM-JJ
-            $table->date('year');
+            $table->string('year');
             $table->integer('subject_id')->unsigned();
             $table->integer('field_id')->unsigned();
             $table->integer('grade_id')->unsigned();
+            $table->time('duration')->default('01:00');
             $table->string('status')->default('publish');
-            $table->integer('user_id')->unsigned()->default('1');;
+            $table->integer('user_id')->unsigned()->default('1');
             // nature is exercise or solution
             // $table->string('nature');
             // $table->integer('twin_id')->unsigned()->nullable();

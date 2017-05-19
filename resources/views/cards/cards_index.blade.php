@@ -28,10 +28,20 @@ $subbar = 'cards';
         @foreach($cards as $i => $card)
             <div class="col-lg-6" id="div_cards_{{ $card->id }}">
                 <h3 class="ctitle text-capitalize">
-                    <a href="{{ url('/epreuves/' . $card->id) }}">{{ $card->title }}</a>
+                    <a href="{{ url('/epreuves/' . $card->id) }}">
+                        {{ "#{$card->id} {$card->card_type_name} {$card->grade_short_name} {$card->field_name} " }}
+                    </a>
                 </h3>
-                <p><strong>{{ $exercises[$i]->title }}</strong></p>
-                <p class="text-justify">{!! $exercises[$i]->content !!}</p>
+                <p><strong>{{ __("Part") . '1' }}</strong></p>
+                <p class="text-justify">{!! $parts[$card->id]['exercise'] !!}</p>
+                <p class="text-justify">
+                    <strong>Questions</strong><br />
+                    <ol style="margin-left:5%;">
+                        @foreach ($parts[$card->id]['questions'] as $question)
+                            <li>{{ $question }}</li>
+                        @endforeach
+                    </ol>
+                </p>
                 <p>
                     <csmall>Posted: {{ $card->created_at }}</csmall>
                     |

@@ -29,15 +29,11 @@ $subbar = 'exercises';
             <div class="" id="div_exercises_{{ $exercise->id }}">
                 <h3 class="ctitle text-capitalize">
                     <a href="{{ url('/exercises/' . $exercise->id) }}">
-                        #{{ $exercise->id }} {{ $exercise->title }}
+                        #{{ $exercise->id }}
                     </a>
                 </h3>
                 <p class="text-justify">{!! $exercise->content !!}</p>
                 <p>
-                    <csmall>Posted: {{ $exercise->created_at }}</csmall>
-                    |
-                    <csmall2>By: {{ $exercise->user_username }}</csmall2>
-                    |
                     <csmall><a href="#">{{ $exercise->subject_name }}</a></csmall>
                 </p>
                 @if (Auth::check())

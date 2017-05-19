@@ -26,7 +26,9 @@
                 <img class="thumbnail" src="/img/solid/thumb0{{ $i+1 }}.jpg" alt="Popular Post">
             </a>
             <p>
-                <a href="{{ url('/epreuves/' . $latest_card->id) }}">{{ $latest_card->title }}</a>
+                <a href="{{ url('/epreuves/' . $latest_card->id) }}">
+                    {{ "{$latest_card->card_type_name} {$latest_card->grade_short_name} {$latest_card->field_name} " }}
+                </a>
             </p>
             <p>
                 By {{ $latest_card->user_username }} |

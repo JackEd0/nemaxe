@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ploggmedia
- * Date: 2017-01-26
- * Time: 8:45 AM
- */
 $navbar = [
     'home' => '', 'chapters' => '', 'fields' => '', 'grades' => '', 'card_types' => '',
     'subjects' => '', 'login' => '', 'register' => '', 'admin' => '', 'profil' => '',

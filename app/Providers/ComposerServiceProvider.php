@@ -17,9 +17,13 @@ class ComposerServiceProvider extends ServiceProvider
         $latest_cards = DB::table('cards')
             ->join('users', 'users.id', '=', 'cards.user_id')
             ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
+            ->join('grades', 'cards.grade_id', '=', 'grades.id')
+            ->join('fields', 'cards.field_id', '=', 'fields.id')
             ->select('cards.*',
                 'card_types.name as card_type_name',
-                'users.username as user_username')
+                'users.username as user_username',
+                'grades.short_name as grade_short_name',
+                'fields.name as field_name')
             ->limit(4)
             ->get();
         view()->share('card_types', DB::table('card_types')->get());

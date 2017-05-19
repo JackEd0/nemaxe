@@ -37,7 +37,8 @@ class GradeController extends Controller
     public function store(Request $request)
     {
         $new_grade_id = DB::table('grades')->insertGetId([
-            'name' => $request->input('name')
+            'name' => $request->input('name'),
+            'short_name' => $request->input('short_name')
         ]);
 
         return response()->json(['message' => 'Success!','state' => 200, 'data' => $new_grade_id]);
@@ -76,7 +77,8 @@ class GradeController extends Controller
     {
         DB::table('grades')->where('id', $id)
             ->update([
-                'name' => $request->input('name')
+                'name' => $request->input('name'),
+                'short_name' => $request->input('short_name')
             ]);
         return response()->json(['message' => 'Success!','state' => 200]);
     }

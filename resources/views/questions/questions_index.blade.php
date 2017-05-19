@@ -6,7 +6,7 @@
 $subbar = 'questions';
 ?>
 
-@extends('layouts.admin')
+@extends('layouts.master')
 
 @section('title') Questions @stop
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCardExercisesTable extends Migration
+class CreateCardChaptersXrefTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateCardExercisesTable extends Migration
      */
     public function up()
     {
-        Schema::create('card_exercises', function (Blueprint $table) {
+        Schema::create('card_chapters_xref', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('card_id')->unsigned();
-            $table->integer('exercise_id')->unsigned();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            $table->integer('chapter_id')->unsigned();
         });
     }
 
@@ -29,6 +27,6 @@ class CreateCardExercisesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('card_exercises');
+        Schema::dropIfExists('card_chapters_xref');
     }
 }

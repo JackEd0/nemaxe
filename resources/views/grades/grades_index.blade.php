@@ -6,7 +6,7 @@
 $subbar = 'grades';
 ?>
 
-@extends('layouts.admin')
+@extends('layouts.master')
 
 @section('title')
     Classes
@@ -38,6 +38,7 @@ $subbar = 'grades';
             <thead>
             <tr>
                 <th>Nom</th>
+                <th>@lang('short name')</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -45,6 +46,7 @@ $subbar = 'grades';
             @foreach ($grades as $grade)
                 <tr id="tr_{{ $grade->id}}">
                     <td id="name_{{ $grade->id}}">{{ $grade->name }}</td>
+                    <td id="short_name_{{ $grade->id}}">{{ $grade->short_name }}</td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-default" title="Sauvegarder"

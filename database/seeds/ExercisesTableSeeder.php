@@ -21,18 +21,15 @@ class ExercisesTableSeeder extends Seeder
             'Sed cautela nimia in peiores haeserat plagas, ut narrabimus postea, aemulis ' .
             'consarcinantibus insidias graves apud Constantium, cetera medium principem sed ' .
             'siquid auribus eius huius modi quivis infudisset ignotus, acerbum et inplacabilem ' .
-            'et in hoc causarum titulo dissimilem sui.<br />' .
-            '<strong>Questions</strong><br /><ol style="margin-left:5%;">' .
-            '<li>Lorem ipsum dolor sit amet</li><li>Lorem ipsum dolor sit amet consectetur' .
-            'adipiscing elit</li></ol>';
+            'et in hoc causarum titulo dissimilem sui.';
         $nature_list = array('exercise', 'solution');
         for ($i = 0; $i < 20; $i++) {
             DB::table('exercises')->insert([
-                'title' =>  $title_list[rand(0,count($title_list)-1)] . ' Partie ' . $i,
+                // 'title' =>  $title_list[rand(0,count($title_list)-1)] . ' Partie ' . $i,
                 'content' => $content_list,
                 'subject_id' => rand(1,4),
                 'grade_id' => rand(1,2),
-                'duration' => '00:' . rand(2,5) . '0:00'
+                // 'duration' => '00:' . rand(2,5) . '0:00'
             ]);
         }
     }

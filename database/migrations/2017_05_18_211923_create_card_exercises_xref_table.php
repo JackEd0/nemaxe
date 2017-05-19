@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCardTagsTable extends Migration
+class CreateCardExercisesXrefTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateCardTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('card_tags', function (Blueprint $table) {
+        Schema::create('card_exercises_xref', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('card_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
+            $table->integer('exercise_id')->unsigned();
+            $table->integer('question_id')->unsigned();
+            $table->integer('question_order')->unsigned();
         });
     }
 
@@ -27,6 +29,6 @@ class CreateCardTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('card_tags');
+        Schema::dropIfExists('card_exercises_xref');
     }
 }

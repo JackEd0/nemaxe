@@ -6,7 +6,7 @@
 $subbar = 'users';
 ?>
 
-@extends('layouts.admin')
+@extends('layouts.master')
 
 @section('title')
     Utilisateurs

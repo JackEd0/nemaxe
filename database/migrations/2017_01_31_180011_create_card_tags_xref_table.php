@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExercisesQuestionsEqsTable extends Migration
+class CreateCardTagsXrefTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateExercisesQuestionsEqsTable extends Migration
      */
     public function up()
     {
-        Schema::create('exercises_questions_eqs', function (Blueprint $table) {
+        Schema::create('card_tags_xref', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order')->unsigned();
-            $table->integer('exercise_id')->unsigned();
-            $table->integer('question_id')->unsigned();
+            $table->integer('card_id')->unsigned();
+            $table->integer('tag_id')->unsigned();
         });
     }
 
@@ -28,6 +27,6 @@ class CreateExercisesQuestionsEqsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exercises_questions_eqs');
+        Schema::dropIfExists('card_tags_xref');
     }
 }

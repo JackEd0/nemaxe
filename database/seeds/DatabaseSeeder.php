@@ -11,14 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(CardExercisesTableSeeder::class);
+        $this->call(CardChaptersXrefTableSeeder::class);
+        $this->call(CardExercisesXrefTableSeeder::class);
         $this->call(CardsTableSeeder::class);
-        $this->call(CardTagsTableSeeder::class);
+        $this->call(CardTagsXrefTableSeeder::class);
         $this->call(CardTypesTableSeeder::class);
         $this->call(ChaptersTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
         $this->call(ExercisesTableSeeder::class);
-        $this->call(ExercisesQuestionsEqsTableSeeder::class);
         $this->call(FieldsTableSeeder::class);
         $this->call(GradesTableSeeder::class);
         $this->call(QuestionsTableSeeder::class);
