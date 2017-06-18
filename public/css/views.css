@@ -1,3 +1,44 @@
+#home_form input[type=text],
+#home_form input[type=password] {
+  height: 50px;
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+#home_form input[type=text]:hover,
+#home_form input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+#home_form button[type="submit"] {
+  text-transform: uppercase;
+  background-color: #00bcd4;
+  border-color: transparent;
+  border-radius: 0px;
+}
+#home_form button[type="submit"]:hover {
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  background-color: #384452;
+}
+#home_form p.text-justify {
+  font-size: 1.2em;
+}
+#home_description {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+#carousel .carousel-inner {
+  max-height: 400px !important;
+}
 div[id$='_filter'] > label > input {
   height: 34px;
   padding: 6px 12px;
@@ -9,4 +50,34 @@ div[id$='_filter'] > label > input {
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.ws-question ol {
+  margin-left: 30px;
+}
+.ws-question ol li {
+  margin-bottom: 5px;
+}
+.card-part {
+  position: relative;
+  background-color: #f5f5f5;
+  padding-top: 30px;
+}
+#btn_add_part {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+  cursor: pointer;
+}
+.card-questions ol {
+  margin-left: 30px;
+}
+.card-questions ol li {
+  margin-top: 5px;
+}
+.card-exercice {
+  padding: 25px 40px;
+}
+.exercise-item {
+  padding: 10px 20px;
+  cursor: pointer;
 }

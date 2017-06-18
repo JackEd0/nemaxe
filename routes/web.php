@@ -17,7 +17,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 
 Route::get('epreuves/{id}', 'CardController@show');
-Route::get('epreuves', 'CardController@index');
+Route::post('search', 'CardController@search');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
@@ -31,6 +31,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('grades', 'GradeController');
     Route::resource('subjects', 'SubjectController');
     Route::resource('questions', 'QuestionController');
-
-    Route::get('/logout', 'Auth\LoginController@logout');
 });

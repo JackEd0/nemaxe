@@ -14,7 +14,23 @@ class CardController extends Controller
      */
     public function index()
     {
-        return view('cards.cards_index');
+        $cards = DB::table('cards')
+            ->join('users', 'users.id', '=', 'cards.user_id')
+            ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
+            ->join('grades', 'cards.grade_id', '=', 'grades.id')
+            ->join('fields', 'cards.field_id', '=', 'fields.id')
+            ->join('card_exercises_xref', 'cards.id', '=', 'card_exercises_xref.card_id')
+            ->join('exercises', 'card_exercises_xref.exercise_id', '=', 'exercises.id')
+            ->select('cards.*',
+                'exercises.content as exercise_content',
+                'card_types.name as card_type_name',
+                'users.username as user_username',
+                'grades.short_name as grade_short_name',
+                'fields.name as field_name')
+            ->limit(100)
+            ->groupBy('cards.id')
+            ->get();
+        return view('cards.cards_index')->with(compact('cards'));
     }
 
     /**
@@ -24,7 +40,20 @@ class CardController extends Controller
      */
     public function create()
     {
-        return view('cards.cards_form');
+        $subjects = DB::table('subjects')->get();
+        $card_types = DB::table('card_types')->get();
+        $fields = DB::table('fields')->get();
+        $grades = DB::table('grades')->get();
+        $chapters = DB::table('chapters')->where('subject_id', 1)->get();
+        $exercises = DB::table('exercises')->where('subject_id', 1)->get();
+        $status = ['pubish' => 'Publie', 'private' => 'Prive'];
+        $years = [];
+        for ($i=0; $i < 20; $i++) {
+            $years[] = $i + 1990;
+        }
+        return view('cards.cards_form')->with(compact(
+            'subjects', 'card_types', 'fields', 'grades', 'status', 'chapters', 'years', 'exercises'
+        ));
     }
 
     /**
@@ -56,22 +85,40 @@ class CardController extends Controller
      */
     public function show($id)
     {
-        $card = DB::table('cards')->where('cards.id', $id)
+        $card = DB::table('cards')
             ->join('users', 'users.id', '=', 'cards.user_id')
             ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
+            ->join('grades', 'cards.grade_id', '=', 'grades.id')
+            ->join('fields', 'cards.field_id', '=', 'fields.id')
+            ->where('cards.id', $id)
             ->select('cards.*',
                 'card_types.name as card_type_name',
-                'users.username as user_username')
+                'users.username as user_username',
+                'grades.short_name as grade_short_name',
+                'fields.name as field_name')
+            ->limit(100)
             ->first();
-        $exercises = DB::table('card_exercises')
-            ->where('card_id', $card->id)
-            ->join('exercises', 'exercises.id', '=', 'card_exercises.exercise_id')
+        $exercises = DB::table('card_exercises_xref')
+            ->join('exercises', 'card_exercises_xref.exercise_id', '=', 'exercises.id')
+            ->where('card_id', $id)->orderBy('question_order', 'asc')
             ->select('exercises.*')
+            ->groupBy('exercises.id')
             ->get();
-        // $exercises = DB::table('exercises')->where('id', $temp_exercises->exercise_id)->first();
+        foreach ($exercises as $exercise) {
+            $questions[$exercise->id] = DB::table('card_exercises_xref')
+                ->join('questions', 'card_exercises_xref.question_id', '=', 'questions.id')
+                ->where([
+                    ['card_id', $id],
+                    ['card_exercises_xref.exercise_id', $exercise->id]
+                ])
+                ->select('questions.*')
+                ->orderBy('question_order', 'asc')
+                ->get();
+        }
+
         $comments_number = DB::table('comments')->where('card_id', $id)->count();
 
-        return view('cards.cards_show')->with(compact('card', 'comments_number', 'exercises'));
+        return view('cards.cards_show')->with(compact('card', 'comments_number', 'exercises', 'questions'));
     }
 
     /**
@@ -83,10 +130,50 @@ class CardController extends Controller
     public function edit($id)
     {
         $card = DB::table('cards')
+            ->join('users', 'users.id', '=', 'cards.user_id')
+            ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
+            ->join('grades', 'cards.grade_id', '=', 'grades.id')
+            ->join('fields', 'cards.field_id', '=', 'fields.id')
             ->where('cards.id', $id)
+            ->select('cards.*',
+                'card_types.name as card_type_name',
+                'users.username as user_username',
+                'grades.short_name as grade_short_name',
+                'fields.name as field_name')
+            ->limit(100)
             ->first();
+        $exercises = DB::table('card_exercises_xref')
+            ->join('exercises', 'card_exercises_xref.exercise_id', '=', 'exercises.id')
+            ->where('card_id', $id)->orderBy('question_order', 'asc')
+            ->select('exercises.*')
+            ->groupBy('exercises.id')
+            ->get();
+        foreach ($exercises as $exercise) {
+            $questions[$exercise->id] = DB::table('card_exercises_xref')
+                ->join('questions', 'card_exercises_xref.question_id', '=', 'questions.id')
+                ->where([
+                    ['card_id', $id],
+                    ['card_exercises_xref.exercise_id', $exercise->id]
+                ])
+                ->select('questions.*')
+                ->orderBy('question_order', 'asc')
+                ->get();
+        }
 
-        return view('cards.cards_form')->with(compact('id', 'card'));
+        $subjects = DB::table('subjects')->get();
+        $card_types = DB::table('card_types')->get();
+        $fields = DB::table('fields')->get();
+        $grades = DB::table('grades')->get();
+        $chapters = DB::table('chapters')->where('subject_id', 1)->get();
+        $status = ['pubish' => 'Publie', 'private' => 'Prive'];
+        $years = [];
+        for ($i=0; $i < 20; $i++) {
+            $years[] = $i + 1990;
+        }
+        return view('cards.cards_form')->with(compact(
+            'id', 'card', 'comments_number', 'exercises', 'questions',
+            'subjects', 'card_types', 'fields', 'grades', 'status', 'chapters', 'years'
+        ));
     }
 
     /**
@@ -119,7 +206,54 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
+        DB::table('card_exercises_xref')->where('card_id', $id)->delete();
+        DB::table('card_chapters_xref')->where('card_id', $id)->delete();
+        // DB::table('card_chapters_xref')->where('card_id', $id)->delete();
         DB::table('cards')->where('id', $id)->delete();
         return response()->json(['message' => 'Success!','state' => 200]);
+    }
+
+    /**
+     * undocumented function summary
+     *
+     * Undocumented function long description
+     *
+     * @param type var Description
+     * @return return type
+     */
+    public function search(Request $request)
+    {
+        $where_clause = [];
+        if ($request->input('search') !== null) {
+            $where_clause[] = ['exercises.content', 'like', "%{$request->input('search')}%"];
+        }
+        if ($request->input('type') !== null) {
+            $where_clause[] = ['cards.card_type_id', '=', $request->input('type')];
+        }
+        $cards = DB::table('cards')
+            ->join('users', 'users.id', '=', 'cards.user_id')
+            ->join('card_types', 'card_types.id', '=', 'cards.card_type_id')
+            ->join('grades', 'cards.grade_id', '=', 'grades.id')
+            ->join('fields', 'cards.field_id', '=', 'fields.id')
+            ->join('card_exercises_xref', 'cards.id', '=', 'card_exercises_xref.card_id')
+            ->join('exercises', 'card_exercises_xref.exercise_id', '=', 'exercises.id')
+            ->where($where_clause)
+            ->select('cards.*',
+                'exercises.content as exercise_content',
+                'card_types.name as card_type_name',
+                'users.username as user_username',
+                'grades.short_name as grade_short_name',
+                'fields.name as field_name')
+            ->limit(100)
+            ->groupBy('cards.id')
+            ->get();
+        // $parts = [];
+        // foreach($cards as $card) {
+        //     $temp_exercises = DB::table('card_exercises_xref')->where('card_id', $card->id)->orderBy('question_order', 'asc')->get();
+        //     $temp_exercise = DB::table('exercises')->where('id', $temp_exercises[0]->exercise_id)->first();
+        //     $parts[$card->id] = ['exercise' => $temp_exercise->content];
+        // }
+        // return view('search.result')->with(compact('cards', 'parts'));
+        return view('search.result')->with(compact('cards'));
     }
 }

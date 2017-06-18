@@ -1,17 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Edouard Home
- * Date: 31/01/2017
- * Time: 19:08
- */
-?>
-
 <h4 class="animated bounce">Categories</h4>
 <div class="hline"></div>
 @foreach($card_types as $card_type)
     <p>
-        <a href="#"><i class="fa fa-angle-right"></i> {{ $card_type->name }}</a>
+        <a href="#" onclick="$('#type_value').val({{ $card_type->id }}); $('#quick_search_form').submit()">
+            <i class="fa fa-angle-right"></i> {{ $card_type->name }}
+        </a>
         <span class="badge badge-theme pull-right">9</span>
     </p>
 @endforeach
@@ -40,3 +33,8 @@
 </ul>
 
 <div class="spacing"></div>
+<form style="display: none;" action="/search" method="post" id="quick_search_form">
+    {{ csrf_field() }}
+    <input type="text" name="type" id="type_value">
+    <input type="text" name="search" id="search_value">
+</form>

@@ -16,7 +16,7 @@ $subbar = 'cards';
             <div class="content mb">
                 <h1 class="h1-xs">Ajouter une nouvelle fiche</h1>
                 <br/>
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token_field">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token_card">
                 <div class="col-sm-3">
                     <a class="btn btn-primary" href="{{ url('/cards/create') }}">Ajouter</a>
                 </div>
@@ -24,45 +24,47 @@ $subbar = 'cards';
             <hr/>
         @endif
     @endif
-    <div class="content">
-        @foreach($cards as $i => $card)
-            <div class="col-lg-6" id="div_cards_{{ $card->id }}">
-                <h3 class="ctitle text-capitalize">
-                    <a href="{{ url('/epreuves/' . $card->id) }}">
-                        {{ "#{$card->id} {$card->card_type_name} {$card->grade_short_name} {$card->field_name} " }}
-                    </a>
-                </h3>
-                <p><strong>{{ __("Part") . '1' }}</strong></p>
-                <p class="text-justify">{!! $parts[$card->id]['exercise'] !!}</p>
-                <p class="text-justify">
-                    <strong>Questions</strong><br />
-                    <ol style="margin-left:5%;">
-                        @foreach ($parts[$card->id]['questions'] as $question)
-                            <li>{{ $question }}</li>
-                        @endforeach
-                    </ol>
-                </p>
-                <p>
-                    <csmall>Posted: {{ $card->created_at }}</csmall>
-                    |
-                    <csmall2>{{ $comments_number[$i] }} Comments</csmall2>
-                    |
-                    <csmall><a href="#">{{ $card->card_type_name }}</a></csmall>
-                </p>
+    <table class="table table-striped table-hover" id="card_table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th style="width: 60%;">Title</th>
+                <th>Year</th>
+                <th>Created at</th>
                 @if (Auth::check())
                     @if (Auth::user()->user_type < 3)
-                        <span class="btn-group mmb">
-                            <a class="btn btn-secondary" href="{{ url('/cards/' . $card->id . '/edit') }}">
-                                <span class="glyphicon glyphicon-pencil"></span></a>
-                            <button class="btn btn-secondary" type="button"
-                                    onclick="delete_card('{{ $card->id }}')">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </span>
+                        <th>Actions</th>
                     @endif
                 @endif
-                <div class="hline"></div>
-            </div>
-        @endforeach
-    </div>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($cards as $card)
+                <tr id="tr_{{ $card->id}}">
+                    <td>{{ $card->id }}</td>
+                    <td>
+                        <a href="{{ url('/epreuves/' . $card->id) }}">{{ "{$card->card_type_name} {$card->grade_short_name} {$card->field_name}" }}</a>
+                        <p class="text-justify">{!! substr($card->exercise_content, 0, 150) !!} ...</p>
+                    </td>
+                    <td>{{ $card->year }}</td>
+                    <td>{{ substr($card->created_at, 0, 10) }}</td>
+                    @if (Auth::check())
+                        @if (Auth::user()->user_type < 3)
+                            <td>
+                                <span class="btn-group">
+                                    <a class="btn btn-secondary" href="{{ url('/cards/' . $card->id . '/edit') }}">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                    <button class="btn btn-secondary" type="button" onclick="delete_card('{{ $card->id }}')">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </span>
+                            </td>
+                        @endif
+                    @endif
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <script src="/js/views/cards.js" ></script>
 @endsection

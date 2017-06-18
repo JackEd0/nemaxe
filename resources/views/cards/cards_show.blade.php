@@ -1,7 +1,4 @@
-<?php
-
-$subbar = 'cards';
-?>
+<?php $subbar = 'cards'; ?>
 @extends('layouts.master')
 @section('title')
     Fiches
@@ -12,11 +9,17 @@ $subbar = 'cards';
 @stop
 
 @section('content')
-    <h3 class="ctitle text-capitalize">#{{ $card->id }} {{ $card->title }}</h3>
-    @foreach ($exercises as $exercise)
-        <p><strong>{{ $exercise->title }}</strong></p>
-        <p class="text-justify">{!! $exercise->content !!}</p>
-        <br />
+    <h3 class="ctitle text-capitalize">#{{ $card->id }} {{ "{$card->card_type_name} {$card->grade_short_name} {$card->field_name}" }}</h3>
+    @foreach ($exercises as $key => $exercise)
+        <div class="mmb ws-question">
+            <p><strong>Part {{ $key+1 }}</strong></p>
+            <p class="text-justify">{!! $exercise->content !!}</p>
+            <ol>
+                @foreach ($questions[$exercise->id] as $question)
+                    <li>{{ $question->description }}</li>
+                @endforeach
+            </ol>
+        </div>
     @endforeach
     <p>
         <csmall>Posted: {{ $card->created_at }}.</csmall>

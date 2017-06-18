@@ -32,12 +32,6 @@ class ComposerServiceProvider extends ServiceProvider
             'home', 'App\Http\ViewComposers\HomeComposer'
         );
         view()->composer(
-            'cards.cards_form', 'App\Http\ViewComposers\CardComposer'
-        );
-        view()->composer(
-            'cards.cards_index', 'App\Http\ViewComposers\CardComposer@compose_index'
-        );
-        view()->composer(
             'chapters.chapters_index', 'App\Http\ViewComposers\ChapterComposer'
         );
         view()->composer(

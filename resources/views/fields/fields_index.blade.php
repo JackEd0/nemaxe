@@ -1,8 +1,4 @@
 <?php
-/**
- * Date: 23/02/2017
- */
-
 $subbar = 'fields';
 ?>
 

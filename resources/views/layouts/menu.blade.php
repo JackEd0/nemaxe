@@ -3,6 +3,7 @@ $navbar = [
     'home' => '', 'chapters' => '', 'fields' => '', 'grades' => '', 'card_types' => '',
     'subjects' => '', 'login' => '', 'register' => '', 'admin' => '', 'profil' => '',
     'comments' => '', 'cards' => '', 'users' => '', 'exercises' => '', 'questions' => '',
+    'search' => ''
 ];
 if (isset($subbar)) {
     $navbar[$subbar] = 'active';
@@ -22,7 +23,7 @@ if (isset($subbar)) {
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="{{ $navbar['cards'] }}"><a href="{{ url('/epreuves') }}">EPREUVES</a></li>
+                <li class="{{ $navbar['search'] }}"><a href="#" onclick="$('#quick_search_form').submit()">EPREUVES</a></li>
                 @if(!\Auth::check())
                 <li class="{{ $navbar['login'] }}"><a href="{{ url('/login') }}">LOGIN</a></li>
                 <li class="{{ $navbar['register'] }}"><a href="{{ url('/register') }}">REGISTER</a></li>
@@ -40,7 +41,7 @@ if (isset($subbar)) {
                         <li class="{{ $navbar['subjects'] }}"><a href="{{ url('/subjects') }}">MATIERES</a></li>
                         <li class="{{ $navbar['card_types'] }}"><a href="{{ url('/card_types') }}">TYPES</a></li>
                         <li class="{{ $navbar['questions'] }}"><a href="{{ url('/questions') }}">Questions</a></li>
-                        <li><a href="{{ url('/logout') }}">DECONNEXION</a></li>
+                        <li><a href="#" onclick="$('#logout_form').submit()">DECONNEXION</a></li>
                         @if (Auth::user()->user_type_id == 1)
                             <li><a href="{{ url('/') }}">PROFIL</a></li>
                             <li><a href="{{ url('/') }}">COMMENTS</a></li>
@@ -49,7 +50,8 @@ if (isset($subbar)) {
                 </li>
                 @endif
                 <li>
-                    <form>
+                    <form action="/search" method="post">
+                        {{ csrf_field() }}
                         <input type="text" name="search" placeholder="Search.." id="input_search">
                     </form>
                 </li>
@@ -57,3 +59,4 @@ if (isset($subbar)) {
         </div>
     </div>
 </div>
+<form id="logout_form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
