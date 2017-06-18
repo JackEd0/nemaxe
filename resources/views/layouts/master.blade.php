@@ -26,6 +26,7 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.css"/>
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/styles.css" rel="stylesheet">
     <link href="/css/views.css" rel="stylesheet">
 

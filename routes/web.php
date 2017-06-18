@@ -18,6 +18,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('epreuves/{id}', 'CardController@show');
 Route::post('search', 'CardController@search');
+Route::get('search', 'CardController@search');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');

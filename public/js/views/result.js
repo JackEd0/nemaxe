@@ -25,4 +25,17 @@ $(document).ready(function(){
             }
         }
     });
+    if (document.getElementById('advanced_search').value === '') {
+        $("#filter_panel").find("input, select").prop('disabled', true);
+    } else {
+        $("#filter_panel").find("input, select").prop('disabled', false);
+    }
+});
+$("#link_advanced_search").on('click', function () {
+    document.getElementById('advanced_search').value = document.getElementById('advanced_search').value === '' ? '1' : '';
+    if (document.getElementById('advanced_search').value === '') {
+        $("#filter_panel").find("input, select").prop('disabled', true);
+    } else {
+        $("#filter_panel").find("input, select").prop('disabled', false);
+    }
 });

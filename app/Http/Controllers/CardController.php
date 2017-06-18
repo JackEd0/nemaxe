@@ -227,8 +227,8 @@ class CardController extends Controller
         if ($request->input('search') !== null) {
             $where_clause[] = ['exercises.content', 'like', "%{$request->input('search')}%"];
         }
-        if ($request->input('type') !== null) {
-            $where_clause[] = ['cards.card_type_id', '=', $request->input('type')];
+        if ($request->input('card_type') !== null) {
+            $where_clause[] = ['cards.card_type_id', '=', $request->input('card_type')];
         }
         $cards = DB::table('cards')
             ->join('users', 'users.id', '=', 'cards.user_id')
@@ -247,6 +247,14 @@ class CardController extends Controller
             ->limit(100)
             ->groupBy('cards.id')
             ->get();
+        $subjects = DB::table('subjects')->get();
+        $card_types = DB::table('card_types')->get();
+        $fields = DB::table('fields')->get();
+        $grades = DB::table('grades')->get();
+        $years = [];
+        for ($i=0; $i < 20; $i++) {
+            $years[] = $i + 1990;
+        }
         // $parts = [];
         // foreach($cards as $card) {
         //     $temp_exercises = DB::table('card_exercises_xref')->where('card_id', $card->id)->orderBy('question_order', 'asc')->get();
@@ -254,6 +262,6 @@ class CardController extends Controller
         //     $parts[$card->id] = ['exercise' => $temp_exercise->content];
         // }
         // return view('search.result')->with(compact('cards', 'parts'));
-        return view('search.result')->with(compact('cards'));
+        return view('search.result')->with(compact('cards', 'subjects', 'card_types', 'fields', 'grades', 'years'));
     }
 }

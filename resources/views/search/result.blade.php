@@ -22,17 +22,33 @@ $subbar = 'search';
                 </span>
             </div>
             <div class="col-md-12">
-                <a href="#" class="pull-right" data-toggle="collapse" data-target="#filter_panel">Advanced search</a>
+                <a href="#" class="pull-right" data-toggle="collapse" data-target="#filter_panel" id="link_advanced_search">Advanced search</a>
             </div>
-            <div id="filter_panel" class="collapse">
+            <div id="filter_panel" class="collapse {{ isset($_POST['advanced_search']) ? ' in' : '' }}">
+                <input type="hidden" name="advanced_search" value="{{ isset($_POST['advanced_search']) ? $_POST['advanced_search'] : '' }}" id="advanced_search">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="form-group">
-                            <label for="pref-perpage">Type</label>
-                            <select id="pref-perpage" class="form-control">
-                                <option value="2">2</option>
-                                <option value="1000">1000</option>
-                            </select>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="card_type">Type</label>
+                                <select name="card_type" class="form-control" id="card_type">
+                                    @foreach ($card_types as $card_type)
+                                        <option value="{{ $card_type->id }}" {{ (isset($_POST['card_type']) && $_POST['card_type'] == $card_type->id) ? ' selected' : '' }}>
+                                            {{ $card_type->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="field">Field</label>
+                                <select name="field" id="field" class="form-control">
+                                    @foreach ($fields as $field)
+                                        <option value="{{ $field->id }}" {{ (isset($_POST['field']) && $_POST['field'] == $field->id) ? ' selected' : '' }}>
+                                            {{ $field->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,23 +59,23 @@ $subbar = 'search';
         <table class="table table-striped table-hover" id="result_table">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th class="hidden-xs">#</th>
                     <th style="width: 70%;">Title</th>
                     <th>Year</th>
-                    <th>Created at</th>
+                    <th class="hidden-xs">Created at</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($cards as $card)
                     <tr>
-                        <td>{{ $card->id }}</td>
+                        <td class="hidden-xs">{{ $card->id }}</td>
                         <td>
                             <a href="{{ url('/epreuves/' . $card->id) }}">{{ "{$card->card_type_name} {$card->grade_short_name} {$card->field_name}" }}</a>
                             {{-- <p class="text-justify">{!! substr($parts[$card->id]['exercise'], 0, 150) !!} ...</p> --}}
                             <p class="text-justify">{!! substr($card->exercise_content, 0, 150) !!} ...</p>
                         </td>
                         <td>{{ $card->year }}</td>
-                        <td>{{ $card->created_at }}</td>
+                        <td class="hidden-xs">{{ substr($card->created_at, 0, 10) }}</td>
                     </tr>
                 @endforeach
             </tbody>
