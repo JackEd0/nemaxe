@@ -33,8 +33,3 @@
 </ul>
 
 <div class="spacing"></div>
-<form style="display: none;" action="/search" method="post" id="quick_search_form">
-    {{ csrf_field() }}
-    <input type="text" name="card_type" id="type_value">
-    <input type="text" name="search" id="search_value">
-</form>

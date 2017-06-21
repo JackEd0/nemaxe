@@ -32,4 +32,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('grades', 'GradeController');
     Route::resource('subjects', 'SubjectController');
     Route::resource('questions', 'QuestionController');
+
+    Route::post('cards/create/{query}', 'CardController@ajaxHandler');
 });

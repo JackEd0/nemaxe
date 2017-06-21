@@ -7,7 +7,9 @@
 @section('blue-wrap')
     Fiches - Create - Edit
 @stop
-
+@section('styles')
+    <link href="/css/bootstrap-select.min.css" rel="stylesheet">
+@endsection
 @section('content')
     <form class="form-horizontal" action="{{ isset($id) ? url('/cards/'. $id ) : url('/cards') }}" method="post" >
         {{ csrf_field() }}
@@ -68,12 +70,12 @@
 
             @if (isset($id))
                 <div class="form-group">
-                    <label for="chapter_id" class="col-md-4 control-label">{{ __('chapters') }}</label>
+                    <label for="chapter_ids" class="col-md-4 control-label">{{ __('chapters') }}</label>
                     <div class="col-md-4">
                         <select class="form-control" name="subject_id" id="subject_id">
-                            @foreach ($subjects as $subject)
-                                <option value="{{ $subject->id }}" {{ ($subject->id === $card->subject_id) ? ' selected' : '' }}>
-                                    {{ $subject->name }}
+                            @foreach ($chapters as $chapter)
+                                <option value="{{ $chapter->id }}" {{ ($chapter->id === $card->chapter_id) ? ' selected' : '' }}>
+                                    {{ $chapter->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -81,9 +83,9 @@
                 </div>
             @else
                 <div class="form-group">
-                    <label for="chapter_id" class="col-md-4 control-label">{{ __('chapters') }}</label>
+                    <label for="chapter_ids" class="col-md-4 control-label">{{ __('chapters') }}</label>
                     <div class="col-md-4">
-                        <select class="form-control" name="chapter_id[]" id="chapter_id">
+                        <select class="form-control selectpicker" name="chapter_ids[]" id="chapter_ids" multiple>
                             @foreach ($chapters as $chapter)
                                 <option value="{{ $chapter->id }}" >{{ $chapter->name }}</option>
                             @endforeach
@@ -141,42 +143,51 @@
                 @endforeach
             @else
                 <div class="panel panel-default card-part ">
-                    <div class="panel-body">
+                    <div class="panel-body" id="parts_panel">
                         <span class="glyphicon glyphicon-plus-sign" id="btn_add_part" aria-hidden="true"></span>
-                        <div class="card-exercice thumbnail">
+                        <div class="card-exercice thumbnail mmb">
+                            <span class="glyphicon glyphicon-remove-circle" data-event="delete_part" aria-hidden="true"></span>
                             <h4>Exercise</h4>
-                            <textarea name="exercises[]" rows="4" cols="80" class="form-control"></textarea>
-                            <div class="dropdown mmt">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="select_exercises" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Choose an existing exercise
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="select_exercises">
-                                    @foreach ($exercises as $exercise)
-                                        <li class="exercise-item">{{ substr($exercise->content, 0, 150) }}</li>
-                                        <li role="separator" class="divider"></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <hr>
-                            <div class="card-questions">
-                                <h4>Questions</h4>
-                                <div class="input-group">
-                                  <input type="text" class="form-control" placeholder="" id="question_input">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-plus-sign"></span></span>
-                                </div>
-                                <ol id="questions_list">
-                                    <li>Question 0</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
+                            <textarea name="exercises[1]" rows="6" cols="80" class="form-control" required=""></textarea>
+                            {{-- <div class="dropdown mmt">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="select_exercises" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Choose an existing exercise
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="select_exercises">
+                        @foreach ($exercises as $exercise)
+                        <li class="exercise-item">{{ substr($exercise->content, 0, 150) }}</li>
+                        <li role="separator" class="divider"></li>
+                    @endforeach
+                </ul>
+            </div> --}}
+            <hr>
+            <div class="card-questions">
+                <h4>Questions</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control" data-event="question_input">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" data-event="add_question" data-index="1">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </button>
+                    </span>
                 </div>
-            @endif
-            <div class="col-lg-12 mmt">
-                <button type="submit" class="btn btn-primary" name="btn_publish">{{ __('Publish') }}</button>
-                <button type="submit" class="btn btn-secondary" name="btn_save">{{ __('Save') }}</button>
+                <ol data-tag="questions_list"></ol>
             </div>
-        </form>
-        <script src="/js/views/cards.js" ></script>
-    @endsection
+        </div>
+    </div>
+</div>
+@endif
+<button type="button" style="display: none;" id="btn_submit" value="submit"></button>
+</form>
+<div class="col-lg-12 mmt">
+    <button type="submit" class="btn btn-primary" name="btn_publish">{{ __('Publish') }}</button>
+    <button type="submit" class="btn btn-secondary" name="btn_save">{{ __('Save') }}</button>
+</div>
+<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token_field">
+@endsection
+
+@section('scripts')
+    <script src="/js/bootstrap-select.min.js" ></script>
+    <script src="/js/views/cards.js" ></script>
+@endsection

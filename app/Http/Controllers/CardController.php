@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CardController extends Controller
 {
@@ -64,16 +65,45 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('cards')->insert([
-            'number' => DB::table('cards')->max('number') + 1,
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'nature' => $request->input('nature'),
+        $card_id = DB::table('cards')->insertGetId([
             'card_type_id' => $request->input('card_type_id'),
-            'user_id' => $request->input('user_id'),
-            'twin_id' => $request->input('twin_id')
+            'year' => $request->input('year'),
+            'subject_id' => $request->input('subject_id'),
+            'field_id' => $request->input('field_id'),
+            'grade_id' => $request->input('grade_id'),
+            'duration' => $request->input('duration'),
+            'status' => $request->input('btn_save') === null ? 'publish' : 'draft',
+            'user_id' => Auth::id()
         ]);
-
+        // insert chapters
+        $chapter_ids = $request->input('chapter_ids') !== null ? $request->input('chapter_ids') : [];
+        foreach ($chapter_ids as $chapter_id) {
+            DB::table('card_chapters_xref')->insert([
+                'card_id' => $card_id,
+                'chapter_id' => $chapter_id
+            ]);
+        }
+        // insert exercises
+        foreach ($request->input('exercises') as $exercise_index => $exercise) {
+            $exercise_id = DB::table('exercises')->insertGetId([
+                'content' => $exercise,
+                'subject_id' => $request->input('subject_id'),
+                'grade_id' => $request->input('grade_id')
+            ]);
+            $temp_questions = $request->input('questions');
+            $temp_questions = isset($temp_questions[$exercise_index]) ? $temp_questions[$exercise_index] : [];
+            foreach ($temp_questions as $question_index => $question) {
+                $question_id = DB::table('questions')->insertGetId([
+                    'description' => $question
+                ]);
+                DB::table('card_exercises_xref')->insert([
+                    'card_id' => $card_id,
+                    'exercise_id' => $exercise_id,
+                    'question_id' => $question_id,
+                    'question_order' => $question_index + 1
+                ]);
+            }
+        }
         return redirect('/cards');
     }
 
@@ -263,5 +293,24 @@ class CardController extends Controller
         // }
         // return view('search.result')->with(compact('cards', 'parts'));
         return view('search.result')->with(compact('cards', 'subjects', 'card_types', 'fields', 'grades', 'years'));
+    }
+
+    public function ajaxHandler(Request $request, $query)
+    {
+        switch ($query) {
+            case 'get-chapters':
+                $chapters = DB::table('chapters')->where('subject_id', $request->input('subject_id'))->get();
+                $chapters_html = '';
+                foreach ($chapters as $chapter) {
+                    $chapters_html .= "<option value='$chapter->id' >$chapter->name</option>";
+                }
+                $json_result = ['status' => 200, 'data' => ['chapters' => $chapters_html]];
+                break;
+
+            default:
+                $json_result = ['status' => 500, 'data' => ['error' => 'Wrong request']];
+                break;
+        }
+        return response()->json($json_result);
     }
 }

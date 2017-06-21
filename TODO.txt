@@ -10,9 +10,10 @@ TODO:
 - Comments option
 - Likes
 - language package
-- add questions tables for exercises
+- exercise content need to take html or at least new lines (\rn)
+- create card: js validate duration
+- js validation, min = 1 exo
 
-19h-
 
 
 

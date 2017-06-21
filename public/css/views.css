@@ -62,6 +62,16 @@ div[id$='_filter'] > label > input {
   background-color: #f5f5f5;
   padding-top: 30px;
 }
+.card-part button[data-event=delete_question] {
+  border: none;
+}
+.card-part span[data-event=delete_part] {
+  top: 10px;
+  left: 10px;
+  position: absolute;
+  cursor: pointer;
+  color: lightcoral;
+}
 #btn_add_part {
   top: 10px;
   right: 10px;
@@ -76,6 +86,7 @@ div[id$='_filter'] > label > input {
 }
 .card-exercice {
   padding: 25px 40px;
+  position: relative;
 }
 .exercise-item {
   padding: 10px 20px;

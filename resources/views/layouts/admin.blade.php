@@ -23,7 +23,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    {{-- <link href="/css/font-awesome.min.css" rel="stylesheet"> --}}
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/styles.css" rel="stylesheet">
     <link href="/css/views.css" rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
