@@ -12,11 +12,11 @@ $subbar = 'search';
 
 @section('content')
     <div class="row">
-        <form action="/search" method="post">
-            {{ csrf_field() }}
+        <form action="/search" method="get">
+            <!-- {{ csrf_field() }} -->
             <div class="input-group">
                 <input type="text" class="form-control" name="search" placeholder="trygonometrie, appareil respiratoie"
-                value="{{ isset($_POST['search']) ? $_POST['search'] : '' }}">
+                value="{{ isset($_GET['search']) ? $_GET['search'] : '' }}">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary">Search</button>
                 </span>
@@ -24,8 +24,8 @@ $subbar = 'search';
             <div class="col-md-12">
                 <a href="#" class="pull-right" data-toggle="collapse" data-target="#filter_panel" id="link_advanced_search">Advanced search</a>
             </div>
-            <div id="filter_panel" class="collapse {{ isset($_POST['advanced_search']) ? ' in' : '' }}">
-                <input type="hidden" name="advanced_search" value="{{ isset($_POST['advanced_search']) ? $_POST['advanced_search'] : '' }}" id="advanced_search">
+            <div id="filter_panel" class="collapse {{ isset($_GET['advanced_search']) ? ' in' : '' }}">
+                <input type="hidden" name="advanced_search" value="{{ isset($_GET['advanced_search']) ? $_GET['advanced_search'] : '' }}" id="advanced_search">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row">
@@ -33,7 +33,7 @@ $subbar = 'search';
                                 <label for="card_type">Type</label>
                                 <select name="card_type" class="form-control" id="card_type">
                                     @foreach ($card_types as $card_type)
-                                        <option value="{{ $card_type->id }}" {{ (isset($_POST['card_type']) && $_POST['card_type'] == $card_type->id) ? ' selected' : '' }}>
+                                        <option value="{{ $card_type->id }}" {{ (isset($_GET['card_type']) && $_GET['card_type'] == $card_type->id) ? ' selected' : '' }}>
                                             {{ $card_type->name }}
                                         </option>
                                     @endforeach
@@ -43,8 +43,18 @@ $subbar = 'search';
                                 <label for="field">Field</label>
                                 <select name="field" id="field" class="form-control">
                                     @foreach ($fields as $field)
-                                        <option value="{{ $field->id }}" {{ (isset($_POST['field']) && $_POST['field'] == $field->id) ? ' selected' : '' }}>
+                                        <option value="{{ $field->id }}" {{ (isset($_GET['field']) && $_GET['field'] == $field->id) ? ' selected' : '' }}>
                                             {{ $field->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="grade">Grade</label>
+                                <select name="grade" id="grade" class="form-control">
+                                    @foreach ($grades as $grade)
+                                        <option value="{{ $grade->id }}" {{ (isset($_GET['grade']) && $_GET['grade'] == $grade->id) ? ' selected' : '' }}>
+                                            {{ $grade->name }}
                                         </option>
                                     @endforeach
                                 </select>

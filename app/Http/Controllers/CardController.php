@@ -254,11 +254,18 @@ class CardController extends Controller
     public function search(Request $request)
     {
         $where_clause = [];
+        // $is_advanced_search = $request->input('advanced_search') !== null ? false : true;
         if ($request->input('search') !== null) {
             $where_clause[] = ['exercises.content', 'like', "%{$request->input('search')}%"];
         }
         if ($request->input('card_type') !== null) {
             $where_clause[] = ['cards.card_type_id', '=', $request->input('card_type')];
+        }
+        if ($request->input('field') !== null) {
+            $where_clause[] = ['cards.field_id', '=', $request->input('field')];
+        }
+        if ($request->input('grade') !== null) {
+            $where_clause[] = ['cards.grade_id', '=', $request->input('grade')];
         }
         $cards = DB::table('cards')
             ->join('users', 'users.id', '=', 'cards.user_id')
