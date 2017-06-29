@@ -21,3 +21,50 @@ NOTES:
 - cd applications/g | /public_h
 - php artisan migrate:refresh --seed
 - Inspired of 9gag
+In config/app.php add this code:
+
+Notes to add languages
+
+'locale' => 'ru',
+'locales' => ['ru', 'en'],
+The name of the locale can be any.
+In app/Http/Middleware create a new file named Locale.php. The contents of the file should be something like this:
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use App;
+use Config;
+use Session;
+
+class Locale
+{
+  /**
+   * Handle an incoming request.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  \Closure  $next
+   * @return mixed
+   */
+   public function handle($request, Closure $next)
+   {
+     $raw_locale = Session::get('locale');
+     if (in_array($raw_locale, Config::get('app.locales'))) {
+       $locale = $raw_locale;
+     }
+     else $locale = Config::get('app.locale');
+       App::setLocale($locale);
+       return $next($request);
+   }
+ }
+In app/Http/Kernel.php in $middlewareGroupsarray add the this line:
+
+\App\Http\Middleware\Locale::class,
+In routes/web.php add:
+Route::get('setlocale/{locale}', function ($locale) {
+  if (in_array($locale, \Config::get('app.locales'))) {
+    Session::put('locale', $locale);
+  }
+  return redirect()->back();
+});

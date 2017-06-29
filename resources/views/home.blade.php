@@ -49,7 +49,6 @@
         <div class="col-md-6">
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" id="home_form">
                 {{ csrf_field() }}
-
                 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                     <label for="username" class="sr-only">Username</label>
                     <input id="username" type="text" name="username"
@@ -76,7 +75,7 @@
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
-                        Login
+                        {{ __('login') }}
                     </button>
                 </div>
                 <div class="form-group text-center">

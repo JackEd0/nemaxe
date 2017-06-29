@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: ploggmedia
- * Date: 2017-01-26
- * Time: 8:48 AM
- */
-?>
 <div id="footerwrap">
     <div class="container">
         <div class="row">
@@ -32,6 +24,7 @@
                     <a href="{{ url('/') }}">Home</a><br/>
                     <a href="#">About</a><br/>
                     <a href="#">Help</a><br/>
+                    <a href="{{ url('/setlocale/fr') }}">fr</a> | <a href="{{ url('/setlocale/en') }}">en</a><br/>
                 </p>
             </div>
 

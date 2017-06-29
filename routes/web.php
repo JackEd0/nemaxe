@@ -11,6 +11,12 @@
 |
 */
 
+Route::get('setlocale/{locale}', function ($locale) {
+    if (array_key_exists($locale, \Config::get('app.locales'))) {
+        Session::put('locale', $locale);
+    }
+    return redirect()->back();
+});
 
 Auth::routes();
 
