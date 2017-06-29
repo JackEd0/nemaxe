@@ -26,8 +26,14 @@ class ComposerServiceProvider extends ServiceProvider
                 'fields.name as field_name')
             ->limit(4)
             ->get();
-        view()->share('card_types', DB::table('card_types')->get());
+        $card_types_quantity = [];
+        $card_types = DB::table('card_types')->get();
+        foreach ($card_types as $card_type) {
+            $card_types_quantity[$card_type->id] = DB::table('cards')->where('card_type_id', $card_type->id)->count();
+        }
+        view()->share('card_types', $card_types);
         view()->share('latest_cards', $latest_cards);
+        view()->share('card_types_quantity', $card_types_quantity);
         view()->composer(
             'home', 'App\Http\ViewComposers\HomeComposer'
         );

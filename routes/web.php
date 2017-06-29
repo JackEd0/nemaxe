@@ -20,19 +20,22 @@ Route::get('epreuves/{id}', 'CardController@show');
 Route::post('search', 'CardController@search');
 Route::get('search', 'CardController@search');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::resource('users', 'UserController');
-    Route::resource('comments', 'CommentController');
-    Route::resource('tags', 'TagController');
+Route::group(['middleware' => ['auth', 'check.permission:2']], function () {
     Route::resource('cards', 'CardController');
     Route::resource('card_types', 'CardTypeController');
     Route::resource('chapters', 'ChapterController');
     Route::resource('fields', 'FieldController');
-    Route::resource('exercises', 'ExerciseController');
     Route::resource('grades', 'GradeController');
     Route::resource('subjects', 'SubjectController');
-    Route::resource('questions', 'QuestionController');
 
     Route::post('cards/create/{query}', 'CardController@ajaxHandler');
     Route::post('cards/{id}/edit/{query}', 'CardController@ajaxHandler');
+});
+
+Route::group(['middleware' => ['auth', 'check.permission:1']], function () {
+    Route::resource('users', 'UserController');
+    Route::resource('questions', 'QuestionController');
+    Route::resource('exercises', 'ExerciseController');
+    Route::resource('comments', 'CommentController');
+    Route::resource('tags', 'TagController');
 });

@@ -32,17 +32,20 @@ if (isset($subbar)) {
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         {{ Auth::user()->username }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="{{ $navbar['exercises'] }}"><a href="{{ url('/exercises') }}">ENONCES</a></li>
-                        <li class="{{ $navbar['cards'] }}"><a href="{{ url('/cards') }}">EPREUVES</a></li>
-                        <li class="{{ $navbar['users'] }}"><a href="{{ url('/users') }}">UTILISATEURS</a></li>
-                        <li class="{{ $navbar['chapters'] }}"><a href="{{ url('/chapters') }}">CHAPTERS</a></li>
-                        <li class="{{ $navbar['fields'] }}"><a href="{{ url('/fields') }}">SERIES</a></li>
-                        <li class="{{ $navbar['grades'] }}"><a href="{{ url('/grades') }}">CLASSES</a></li>
-                        <li class="{{ $navbar['subjects'] }}"><a href="{{ url('/subjects') }}">MATIERES</a></li>
-                        <li class="{{ $navbar['card_types'] }}"><a href="{{ url('/card_types') }}">TYPES</a></li>
-                        <li class="{{ $navbar['questions'] }}"><a href="{{ url('/questions') }}">Questions</a></li>
+                        @if (Auth::user()->user_type_id <= 2)
+                            <li class="{{ $navbar['cards'] }}"><a href="{{ url('/cards') }}">EPREUVES</a></li>
+                            <li class="{{ $navbar['chapters'] }}"><a href="{{ url('/chapters') }}">CHAPTERS</a></li>
+                            <li class="{{ $navbar['fields'] }}"><a href="{{ url('/fields') }}">SERIES</a></li>
+                            <li class="{{ $navbar['grades'] }}"><a href="{{ url('/grades') }}">CLASSES</a></li>
+                            <li class="{{ $navbar['subjects'] }}"><a href="{{ url('/subjects') }}">MATIERES</a></li>
+                            <li class="{{ $navbar['card_types'] }}"><a href="{{ url('/card_types') }}">TYPES</a></li>
+                        @endif
                         <li><a href="#" onclick="$('#logout_form').submit()">DECONNEXION</a></li>
                         @if (Auth::user()->user_type_id == 1)
+                            <li role="separator" class="divider"></li>
+                            <li class="{{ $navbar['users'] }}"><a href="{{ url('/users') }}">UTILISATEURS</a></li>
+                            <li class="{{ $navbar['questions'] }}"><a href="{{ url('/questions') }}">QUESTIONS</a></li>
+                            <li class="{{ $navbar['exercises'] }}"><a href="{{ url('/exercises') }}">ENONCES</a></li>
                             <li><a href="{{ url('/') }}">PROFIL</a></li>
                             <li><a href="{{ url('/') }}">COMMENTS</a></li>
                         @endif

@@ -5,7 +5,7 @@
         <a href="#" onclick="$('#type_value').val({{ $card_type->id }}); $('#quick_search_form').submit()">
             <i class="fa fa-angle-right"></i> {{ $card_type->name }}
         </a>
-        <span class="badge badge-theme pull-right">9</span>
+        <span class="badge badge-theme pull-right">{{ $card_types_quantity[$card_type->id] }}</span>
     </p>
 @endforeach
 <div class="spacing"></div>

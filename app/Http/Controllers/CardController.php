@@ -240,8 +240,8 @@ class CardController extends Controller
         // insert exercises
         $card_exercises = DB::table('card_exercises_xref')->where('card_id', $id)->get();
         foreach ($card_exercises as $card_exercise) {
-            DB::table('exercises')->whereIn('id', $card_exercise->exercise_id)->delete();
-            DB::table('questions')->whereIn('id', $card_exercise->question_id)->delete();
+            DB::table('exercises')->where('id', $card_exercise->exercise_id)->delete();
+            DB::table('questions')->where('id', $card_exercise->question_id)->delete();
         }
         DB::table('card_exercises_xref')->where('card_id', $id)->delete();
         foreach ($request->input('exercises') as $exercise_index => $exercise) {

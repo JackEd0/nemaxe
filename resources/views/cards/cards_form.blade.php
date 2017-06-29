@@ -110,7 +110,7 @@
             <div class="form-group">
                 <label for="status" class="col-md-4 control-label">{{ __('Duration') }}</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="duration" value="{{ (isset($id)) ? $card->duration : '01:00' }}">
+                    <input type="text" class="form-control" name="duration" value="{{ (isset($id)) ? substr($card->duration, 0, 5) : '01:00' }}">
                 </div>
             </div>
 
@@ -129,14 +129,38 @@
 
             @if (isset($id))
                 @foreach ($exercises as $key => $exercise)
-                    <div class="mmb ws-question">
-                        <p><strong>Part {{ $key+1 }}</strong></p>
-                        <p class="text-justify">{!! $exercise->content !!}</p>
-                        <ol>
-                            @foreach ($questions[$exercise->id] as $question)
-                                <li>{{ $question->description }}</li>
-                            @endforeach
-                        </ol>
+                    <div class="panel panel-default card-part ">
+                        <div class="panel-body" id="parts_panel">
+                            <span class="glyphicon glyphicon-plus-sign" id="btn_add_part" aria-hidden="true"></span>
+                            <div class="card-exercice thumbnail mmb">
+                                <span class="glyphicon glyphicon-remove-circle" data-event="delete_part" aria-hidden="true"></span>
+                                <h4>Exercise</h4>
+                                <textarea name="exercises[{{ $key }}]" rows="6" cols="80" class="form-control" required="">{!! $exercise->content !!}</textarea>
+                                <hr>
+                                <div class="card-questions">
+                                    <h4>Questions</h4>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" data-event="question_input">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" data-event="add_question" data-index="{{ $key }}">
+                                                <span class="glyphicon glyphicon-plus-sign"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <ol data-tag="questions_list">
+                                        @foreach ($questions[$exercise->id] as $question)
+                                            <li>
+                                                <button class="btn btn-default" type="button" data-event="delete_question">
+                                                    <span class="glyphicon glyphicon-remove-circle"></span>
+                                                </button>
+                                                {{ $question->description }}
+                                                <input type="hidden" name="questions[{{ $key }}][]" value="{{ $question->description }}">
+                                            </li>
+                                        @endforeach
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             @else
@@ -147,55 +171,40 @@
                             <span class="glyphicon glyphicon-remove-circle" data-event="delete_part" aria-hidden="true"></span>
                             <h4>Exercise</h4>
                             <textarea name="exercises[1]" rows="6" cols="80" class="form-control" required=""></textarea>
-                            {{-- <div class="dropdown mmt">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="select_exercises" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Choose an existing exercise
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="select_exercises">
-                        @foreach ($exercises as $exercise)
-                        <li class="exercise-item">{{ substr($exercise->content, 0, 150) }}</li>
-                        <li role="separator" class="divider"></li>
-                    @endforeach
-                </ul>
-            </div> --}}
-            <hr>
-            <div class="card-questions">
-                <h4>Questions</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control" data-event="question_input">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" data-event="add_question" data-index="1">
-                            <span class="glyphicon glyphicon-plus-sign"></span>
-                        </button>
-                    </span>
+                            <hr>
+                            <div class="card-questions">
+                                <h4>Questions</h4>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" data-event="question_input">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" data-event="add_question" data-index="1">
+                                            <span class="glyphicon glyphicon-plus-sign"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <ol data-tag="questions_list"></ol>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <ol data-tag="questions_list"></ol>
+            @endif
+            <button type="button" style="display: none;" id="btn_submit" value="submit"></button>
+        </form>
+        @if (!isset($id))
+            <div class="col-lg-12 mmt">
+                <button type="submit" class="btn btn-primary" name="btn_publish">{{ __('Publish') }}</button>
+                <button type="submit" class="btn btn-secondary" name="btn_save">{{ __('Save') }}</button>
             </div>
-        </div>
-    </div>
-</div>
-@endif
-@if (isset($id))
-    <div class="col-lg-12 mmt">
-        <button type="submit" class="btn btn-secondary" name="btn_save">{{ __('Save') }}</button>
-    </div>
-@else
-    <button type="button" style="display: none;" id="btn_submit" value="submit"></button>
-@endif
+        @else
+            <div class="col-lg-12 mmt">
+                <button type="submit" class="btn btn-primary" name="btn_save">{{ __('Save') }}</button>
+            </div>
+        @endif
 
-</form>
-@if (!isset($id))
-    <div class="col-lg-12 mmt">
-        <button type="submit" class="btn btn-primary" name="btn_publish">{{ __('Publish') }}</button>
-        <button type="submit" class="btn btn-secondary" name="btn_save">{{ __('Save') }}</button>
-    </div>
-@endif
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token_field">
+    @endsection
 
-<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token_field">
-@endsection
-
-@section('scripts')
-    <script src="/js/bootstrap-select.min.js" ></script>
-    <script src="/js/views/cards.js" ></script>
-@endsection
+    @section('scripts')
+        <script src="/js/bootstrap-select.min.js" ></script>
+        <script src="/js/views/cards.js" ></script>
+    @endsection

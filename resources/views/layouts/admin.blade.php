@@ -43,13 +43,9 @@
     @include('layouts.menu')
 
     <!-- Content -->
-    <div class="container-fluid mtb">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="row">
-                    @yield('content')
-                </div>
-            </div>
+    <div class="container mtb">
+        <div class="col-lg-12 mb">
+            @yield('content')
         </div>
     </div>
     <!-- FOOTER -->

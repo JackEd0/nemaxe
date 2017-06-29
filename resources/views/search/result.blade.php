@@ -70,7 +70,7 @@ $subbar = 'search';
             <thead>
                 <tr>
                     <th class="hidden-xs">#</th>
-                    <th style="width: 70%;">Title</th>
+                    <th style="width: 65%;">Title</th>
                     <th>Year</th>
                     <th class="hidden-xs">Created at</th>
                 </tr>

@@ -31,57 +31,6 @@ $(document).ready(function(){
     });
 });
 
-function edit_card(id) {
-    var card_name = document.getElementById( "name_" + id ).textContent;
-    var card_description = document.getElementById( "description_" + id ).textContent;
-    var div_edit_card =
-    '<div class="col-sm-3">' +
-        '<input type="text" class="form-control" placeholder="Nom"' +
-               'autofocus="" id="card_name" value="' + card_name + '">' +
-    '</div>' +
-    '<div class="col-sm-3">' +
-        '<input type="text" class="form-control" placeholder="Descripition"' +
-               'id="card_description" value="' + card_description + '">' +
-    '</div>' +
-    '<div class="col-sm-3">' +
-        '<button type="button" class="btn btn-primary" onclick="update_card(' + id + ')" style="margin-right: 10px;">' +
-            'Modifier' +
-        '</button>' +
-        '<button type="button" class="btn btn-danger" onclick="remove_div_card()">' +
-            'Annuler' +
-        '</button>' +
-    '</div>';
-    $("#div_edit_card").html(div_edit_card);
-    $("#div_edit_card").css('margin-bottom', '90px');
-}
-
-function update_card(id) {
-    var card_name = document.getElementById( "card_name" ).value;
-    var card_description = document.getElementById( "card_description" ).value;
-    $.ajax({
-        url: window.location.href + "/" + id,
-        type: 'POST',
-        data: {
-            name: card_name,
-            description: card_description,
-            _method: "PUT", _token: $("#token_card").val()
-        },
-        dataType: 'json',
-        success: function (response) {
-            $("#name_" + id).text(card_name);
-            $("#description_" + id).text(card_description);
-            var initial_color = $("#tr_" + id).css('background-color');
-            $("#tr_" + id).css({'background-color': '#93FF93'});
-            setTimeout(function () {
-                $("#tr_" + id).css({'background-color': initial_color});
-            }, 1500);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log('POST: ', jqXHR, textStatus, errorThrown);
-        }
-    });
-}
-
 function remove_div_card() {
     $("#div_edit_card").html('');
     $("#div_edit_card").css('margin-bottom', '0');
@@ -112,41 +61,6 @@ function delete_card(id) {
     });
 }
 
-function store_card() {
-    var card_name = document.getElementById( "name" ).value;
-    var card_description = document.getElementById( "description" ).value;
-    $.ajax({
-        url: window.location.href,
-        type: 'POST',
-        data: {name: card_name, description: card_description, _token: $("#token_card").val()},
-        dataType: 'json',
-        success: function (response) {
-            var new_card_id = response.data;
-            var new_card =
-            '<tr id="tr_' + new_card_id +'">' +
-                '<td id="name_' + new_card_id + '">' + card_name + '</td>' +
-                '<td id="description_' + new_card_id + '">' + card_description + '</td>' +
-                '<td>' +
-                    '<div class="btn-group">' +
-                        '<a class="btn btn-default" title="Sauvegarder"' +
-                        'onclick="edit_card(' + new_card_id + ')">' +
-                            '<span class="glyphicon glyphicon-floppy-disk"></span></a>' +
-                        '<a class="btn btn-default" title="Supprimer" onclick="delete_card(' + new_card_id + ')">' +
-                            '<span class="glyphicon glyphicon-remove"></span></a>' +
-                    '</div>' +
-                '</td>' +
-            '</tr>';
-
-            $("tbody").prepend(new_card);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log('POST: ', jqXHR, textStatus, errorThrown);
-        }
-    });
-}
-
-
-
 // cards.form view
 var part_index = 1;
 $('input[data-event=question_input]').on('keyup', function (e) {
@@ -158,11 +72,11 @@ $('input[data-event=question_input]').on('keyup', function (e) {
 $('button[data-event=add_question]').on('click', function () {
     add_question($(this));
 });
-// $('span[data-event=delete_part]').on('click', function () {
-//     delete_part($(this));
-// });
 $('.card-part').on('click', 'span[data-event=delete_part]', function () {
     delete_part($(this));
+});
+$('.card-part').on('click', 'button[data-event=delete_question]', function () {
+    $(this).parent().remove();
 });
 $('#subject_id').on('change', function () {
     udpate_subject($(this));
@@ -172,7 +86,6 @@ $('#btn_add_part').on('click', function () {
 });
 $('button[type=submit]')
 .on('click', function () {
-    // $('form').submit();
     $('#btn_submit').prop('name', $(this).prop('name'));
     $('#btn_submit').prop('type', 'submit');
     $('#btn_submit').click();
@@ -193,9 +106,6 @@ function add_question($element) {
         '<input type="hidden" name="questions[' + $element.data('index') + '][]" value="' + question + '">' +
     '</li>';
     $element.parent().parent().parent().find('ol[data-tag=questions_list]').append(new_question);
-    $('button[data-event=delete_question]').on('click', function () {
-        $(this).parent().remove();
-    });
 }
 function udpate_subject($element) {
     var subject_id = $element.val();
@@ -246,13 +156,9 @@ function add_part() {
     $('button[data-event=add_question]').on('click', function () {
         add_question($(this));
     });
-    // $('span[data-event=delete_part]').on('click', function () {
-    //     delete_part($(this));
-    // });
 }
 function delete_part($element) {
     if (!confirm('Are you sure you want to delete this part ?')) { return false; }
-    console.log(part_index);
     part_index--;
     $element.parent().remove();
 }

@@ -6,13 +6,9 @@
 * Time: 13:50
 */
 ?>
-@extends('layouts.master')
+@extends('layouts.admin')
 @section('title')
     Accueil
-@stop
-
-@section('blue-wrap')
-    Search - Find - Enjoy
 @stop
 
 @section('content')

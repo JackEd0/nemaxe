@@ -54,7 +54,7 @@
     <!-- Content -->
     <div class="container mtb">
         <div class="col-lg-12">
-            <div class="col-lg-8 mb">
+            <div class="col-lg-8 mb padding-r">
                 @yield('content')
                 <div class="spacing"></div>
             </div>
