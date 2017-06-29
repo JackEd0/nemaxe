@@ -194,14 +194,16 @@ class CardController extends Controller
         $card_types = DB::table('card_types')->get();
         $fields = DB::table('fields')->get();
         $grades = DB::table('grades')->get();
-        $chapters = DB::table('chapters')->where('subject_id', 1)->get();
+        $chapters = DB::table('chapters')->where('subject_id', $card->subject_id)->get();
+        $card_chapters = DB::table('card_chapters_xref')->where('card_id', $id)->get();
+        $card_chapters = !empty($card_chapters) ? $card_chapters->pluck('chapter_id')->all() : [];
         $status = ['pubish' => 'Publie', 'private' => 'Prive'];
         $years = [];
         for ($i=0; $i < 20; $i++) {
             $years[] = $i + 1990;
         }
         return view('cards.cards_form')->with(compact(
-            'id', 'card', 'comments_number', 'exercises', 'questions',
+            'id', 'card', 'comments_number', 'exercises', 'questions', 'card_chapters',
             'subjects', 'card_types', 'fields', 'grades', 'status', 'chapters', 'years'
         ));
     }
@@ -217,14 +219,51 @@ class CardController extends Controller
     {
         DB::table('cards')->where('id', $id)
             ->update([
-                'number' => DB::table('cards')->max('number') + 1,
-                'title' => $request->input('title'),
-                'content' => $request->input('content'),
-                'nature' => $request->input('nature'),
                 'card_type_id' => $request->input('card_type_id'),
-                'user_id' => $request->input('user_id'),
-                'twin_id' => $request->input('twin_id')
+                'year' => $request->input('year'),
+                'subject_id' => $request->input('subject_id'),
+                'field_id' => $request->input('field_id'),
+                'grade_id' => $request->input('grade_id'),
+                'duration' => $request->input('duration'),
+                'status' => $request->input('status'),
+                'user_id' => Auth::id()
             ]);
+        // insert chapters
+        $chapter_ids = $request->input('chapter_ids') !== null ? $request->input('chapter_ids') : [];
+        DB::table('card_chapters_xref')->where('card_id', $id)->delete();
+        foreach ($chapter_ids as $chapter_id) {
+            DB::table('card_chapters_xref')->insert([
+                'card_id' => $id,
+                'chapter_id' => $chapter_id
+            ]);
+        }
+        // insert exercises
+        $card_exercises = DB::table('card_exercises_xref')->where('card_id', $id)->get();
+        foreach ($card_exercises as $card_exercise) {
+            DB::table('exercises')->whereIn('id', $card_exercise->exercise_id)->delete();
+            DB::table('questions')->whereIn('id', $card_exercise->question_id)->delete();
+        }
+        DB::table('card_exercises_xref')->where('card_id', $id)->delete();
+        foreach ($request->input('exercises') as $exercise_index => $exercise) {
+            $exercise_id = DB::table('exercises')->insertGetId([
+                'content' => $exercise,
+                'subject_id' => $request->input('subject_id'),
+                'grade_id' => $request->input('grade_id')
+            ]);
+            $temp_questions = $request->input('questions');
+            $temp_questions = isset($temp_questions[$exercise_index]) ? $temp_questions[$exercise_index] : [];
+            foreach ($temp_questions as $question_index => $question) {
+                $question_id = DB::table('questions')->insertGetId([
+                    'description' => $question
+                ]);
+                DB::table('card_exercises_xref')->insert([
+                    'card_id' => $id,
+                    'exercise_id' => $exercise_id,
+                    'question_id' => $question_id,
+                    'question_order' => $question_index + 1
+                ]);
+            }
+        }
         return redirect('/cards');
     }
 
@@ -302,7 +341,7 @@ class CardController extends Controller
         return view('search.result')->with(compact('cards', 'subjects', 'card_types', 'fields', 'grades', 'years'));
     }
 
-    public function ajaxHandler(Request $request, $query)
+    public function ajaxHandler(Request $request, $id, $query)
     {
         switch ($query) {
             case 'get-chapters':

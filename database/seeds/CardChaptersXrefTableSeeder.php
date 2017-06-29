@@ -15,7 +15,7 @@ class CardChaptersXrefTableSeeder extends Seeder
             for ($j=0; $j < 2; $j++) {
                 DB::table('card_chapters_xref')->insert([
                     'card_id' => $i + 1,
-                    'chapter_id' => ($i % 3) + 1,
+                    'chapter_id' => $j + 1,
                 ]);
             }
         }

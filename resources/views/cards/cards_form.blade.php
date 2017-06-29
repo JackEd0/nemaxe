@@ -72,11 +72,9 @@
                 <div class="form-group">
                     <label for="chapter_ids" class="col-md-4 control-label">{{ __('chapters') }}</label>
                     <div class="col-md-4">
-                        <select class="form-control" name="subject_id" id="subject_id">
+                        <select class="form-control selectpicker" name="chapter_ids[]" id="chapter_ids" multiple>
                             @foreach ($chapters as $chapter)
-                                <option value="{{ $chapter->id }}" {{ ($chapter->id === $card->chapter_id) ? ' selected' : '' }}>
-                                    {{ $chapter->name }}
-                                </option>
+                                <option value="{{ $chapter->id }}" {{ in_array($chapter->id, $card_chapters) ? ' selected' : '' }} >{{ $chapter->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -178,12 +176,22 @@
     </div>
 </div>
 @endif
-<button type="button" style="display: none;" id="btn_submit" value="submit"></button>
+@if (isset($id))
+    <div class="col-lg-12 mmt">
+        <button type="submit" class="btn btn-secondary" name="btn_save">{{ __('Save') }}</button>
+    </div>
+@else
+    <button type="button" style="display: none;" id="btn_submit" value="submit"></button>
+@endif
+
 </form>
-<div class="col-lg-12 mmt">
-    <button type="submit" class="btn btn-primary" name="btn_publish">{{ __('Publish') }}</button>
-    <button type="submit" class="btn btn-secondary" name="btn_save">{{ __('Save') }}</button>
-</div>
+@if (!isset($id))
+    <div class="col-lg-12 mmt">
+        <button type="submit" class="btn btn-primary" name="btn_publish">{{ __('Publish') }}</button>
+        <button type="submit" class="btn btn-secondary" name="btn_save">{{ __('Save') }}</button>
+    </div>
+@endif
+
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token_field">
 @endsection
 

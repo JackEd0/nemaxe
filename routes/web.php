@@ -34,4 +34,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('questions', 'QuestionController');
 
     Route::post('cards/create/{query}', 'CardController@ajaxHandler');
+    Route::post('cards/{id}/edit/{query}', 'CardController@ajaxHandler');
 });
