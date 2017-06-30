@@ -10,13 +10,13 @@
 @endforeach
 <div class="spacing"></div>
 
-<h4>{{ __('latest tests') }}</h4>
+<h4 class="capitalize-first-letter">{{ __('latest tests') }}</h4>
 <div class="hline"></div>
 <ul class="popular-posts">
     @foreach ($latest_cards as $i => $latest_card)
         <li>
             <a href="{{ url('/epreuves/' . $latest_card->id) }}">
-                <img class="thumbnail" src="/img/solid/thumb0{{ $i+1 }}.jpg" alt="Popular Post">
+                <img class="thumbnail" style="height: 60px;" src="/img/thumbnails/thumb{{ $i+1 }}.jpg" alt="Popular Post">
             </a>
             <p>
                 <a href="{{ url('/epreuves/' . $latest_card->id) }}">
@@ -24,8 +24,8 @@
                 </a>
             </p>
             <p>
-                By {{ $latest_card->user_username }} |
-                In <a href="#">{{ $latest_card->card_type_name }}</a>
+                {{ __('By') }} {{ $latest_card->user_username }} |
+                {{ __('In') }} <a href="#">{{ $latest_card->card_type_name }}</a>
             </p>
             <em>Posted on {{ substr($latest_card->created_at, 0, 10) }}</em>
         </li>
