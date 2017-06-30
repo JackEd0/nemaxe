@@ -148,6 +148,9 @@ p {
   border-bottom: 2px solid #ffffff;
   margin-bottom: 25px;
 }
+.capitalize-first-letter::first-letter {
+  text-transform: uppercase;
+}
 #blue {
   background: #384452;
   margin-top: 60px;
@@ -246,6 +249,7 @@ csmall2 {
   color: white;
   font-weight: 700;
   font-size: 12px;
+  text-transform: capitalize;
 }
 .navbar-default .navbar-nav > li > a:hover {
   color: #384452;
@@ -271,6 +275,16 @@ csmall2 {
   font-weight: 700;
   font-size: 12px;
 }
+.img-thumbnail.icon-small {
+  height: 15px;
+  padding: 1px;
+}
+.lang-dropdown > ul {
+  min-width: 0;
+}
+.lang-dropdown > ul a {
+  padding-left: 15px;
+}
 #footerwrap {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -281,6 +295,7 @@ csmall2 {
 }
 #footerwrap h4 {
   color: white;
+  text-transform: capitalize;
 }
 #footerwrap i {
   font-size: 30px;
@@ -291,6 +306,7 @@ csmall2 {
 }
 #footerwrap a {
   color: white;
+  text-transform: capitalize;
 }
 #footerwrap a:hover,
 #footerwrap a:focus {

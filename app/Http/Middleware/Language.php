@@ -24,7 +24,10 @@ class Language
         } else {
             $locale = Config::get('app.locale');
         }
+        // var_dump($locale); die('');
+        // $locale_lang = App::getLocale();
         App::setLocale($locale);
+        // var_dump(App::getLocale());die('');
         return $next($request);
     }
 }

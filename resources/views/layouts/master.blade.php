@@ -5,9 +5,10 @@
 * Date: 2017-01-26
 * Time: 8:44 AM
 */
+$locale_lang = \App::getLocale();
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ $locale_lang }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,6 +71,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
     <script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="/js/bootstrap.min.js"><\/script>')}</script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js"></script>
+    <script>
+        var locale_lang = '{{ $locale_lang }}';
+    </script>
     @yield('scripts')
 </body>
 </html>

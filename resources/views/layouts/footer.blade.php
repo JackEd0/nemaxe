@@ -2,12 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 mmb">
-                <h4>About</h4>
+                <h4>{{ __('about') }}</h4>
                 <div class="hline-w"></div>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
             </div>
             <div class="col-lg-4 mmb">
-                <h4>Social Links</h4>
+                <h4>{{ __('social links') }}</h4>
                 <div class="hline-w"></div>
                 <p>
                     <a href="#"><i class="fa fa-dribbble"></i></a>
@@ -18,13 +18,12 @@
                 </p>
             </div>
             <div class="col-lg-4 mmb">
-                <h4>Navigation</h4>
+                <h4>{{ __('navigation') }}</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="{{ url('/') }}">Home</a><br/>
-                    <a href="#">About</a><br/>
-                    <a href="#">Help</a><br/>
-                    <a href="{{ url('/setlocale/fr') }}">fr</a> | <a href="{{ url('/setlocale/en') }}">en</a><br/>
+                    <a href="{{ url('/') }}">{{ __('home') }}</a><br/>
+                    <a href="#">{{ __('about') }}</a><br/>
+                    <a href="#">{{ __('help') }}</a><br/>
                 </p>
             </div>
 

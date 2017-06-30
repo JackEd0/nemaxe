@@ -1,4 +1,4 @@
-<h4 class="animated bounce">Categories</h4>
+<h4 class="animated bounce text-capitalize">{{ __('categories') }}</h4>
 <div class="hline"></div>
 @foreach($card_types as $card_type)
     <p>
@@ -10,7 +10,7 @@
 @endforeach
 <div class="spacing"></div>
 
-<h4>Latest courses</h4>
+<h4>{{ __('latest tests') }}</h4>
 <div class="hline"></div>
 <ul class="popular-posts">
     @foreach ($latest_cards as $i => $latest_card)
